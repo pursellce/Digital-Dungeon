@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<!-- css and javascript are loaded here -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This line ensures that the website is the same width as whatever device is viewing it. -->
+		<title>Digital Dungeon</title>
+		<link rel="icon" type="image/png" href="images/icon.png">
+		
+		<style type="text/css">
+		
+		body {
+			background-image: url('images/background.png');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: 100% 100%;
+			}
+		
+		#TopText{				<!-- This is for the text that is at the top of the page like "DIGITAL_DUNGEON". -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.35vw; <!-- This line is experimenting with changing font size based on window size. -->
+			<!-- OLD FONT SIZE WAS font-size: 60px; -->
+			}
+			
+		#NormalText{				<!-- This is for normal text in the page like "// If you just want to try the game." -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			color: grey;
+			}
+			
+		.Buttons{					<!-- This is for a test button. Is never used anymore. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 10px solid black;
+			border-radius: 20px;
+			background-color: green;
+			cursor: pointer;
+			}
+			
+		.Buttons:hover{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 10px solid black;
+			border-radius: 20px;
+			background-color: darkgreen;
+			cursor: pointer;
+			}
+			
+		.ButtonBlue{				<!-- This is for a blue button. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #3853A4;
+			background-color: #D1D7EA;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+			
+		.ButtonBlue:hover{			<!-- This is what defines the color of blue buttons when you put your cursor over them. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #D1D7EA;
+			background-color: #3853A4;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+			
+		.ButtonPurple{				<!-- This is for a purple button. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #6A52A2;
+			background-color: #DDD7E9;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+			
+		.ButtonPurple:hover{		<!-- This is what defines the color of purple buttons when you put your cursor over them. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #DDD7E9;
+			background-color: #6A52A2;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+		<!-- Green Button is not used on this page but was made here for reference. -->
+		.ButtonGreen{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #2DB34B;
+			background-color: #CEEDD5;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+			
+		.ButtonGreen:hover{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #CEEDD5;
+			background-color: #2DB34B;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+		
+		.ButtonRed{						<!-- This is for a purple button. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #EE2828;
+			background-color: #FBCDCD;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+			
+		.ButtonRed:hover{				<!-- This is what defines the color of purple buttons when you put your cursor over them. -->
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #FBCDCD;
+			background-color: #EE2828;
+			height: 75px;
+			width: 300px;
+			cursor: pointer;
+		}
+		
+		</style>
+		
+	</head>
+
+		
+	<body>
+	<br><br><br><br><br><br><br><br><br> <!-- This line adds spaces at the top of the page -->
+	
+	<div id="TopText">DIGITAL_DUNGEON <!-- This line centers the title but also just happens to center all of the buttons which is why it doesn't close until way later down. -->
+	
+	<br><br><br>
+	
+	<button class="ButtonBlue" onclick="window.location.href='login.html';"> Login </button> <br> 
+	
+	<div id="NormalText"> <br> </div>
+	
+	<button class="ButtonPurple" onclick="window.location.href='register.html';"> Register </button> <br>
+	
+	<br><br> <h1 style="font-size:50px"> <br> </h1>				<!-- This line is for making space between the Register button and the text that describes the guest button. -->
+	
+	<div id="NormalText"> // If you just want to <strong>try</strong> the game. <br><br><br></div>
+	
+	<button class="ButtonRed" onclick="window.location.href='game.html';"> 
+	
+	Guest 
+	</button> <br>
+	
+	</div> <!-- This is where the part that centers DIGITAL_DUNGEON and everything else on the page is closed. -->
+	
+	</body> 
+	
+	
+</html>
