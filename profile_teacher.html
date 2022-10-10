@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<!-- css and javascript are loaded here -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This line ensures that the website is the same width as whatever device is viewing it. -->
+    <title>Digital Dungeon</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    
+    <style type="text/css">
+    
+		body {
+			background-image: url('images/background.png');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: 100% 100%;
+			}
+		
+		#TopText{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 4.0vw;
+			}
+			
+		#NormalText{	
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			color: grey;
+			}
+			
+		.Buttons{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 10px solid black;
+			border-radius: 20px;
+			background-color: green;
+			cursor: pointer;
+			}
+			
+		.Buttons:hover{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 10px solid black;
+			border-radius: 20px;
+			background-color: darkgreen;
+			cursor: pointer;
+			}
+			
+		.ButtonBlue{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #3853A4;
+			background-color: #D1D7EA;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+			
+		.ButtonBlue:hover{			
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #D1D7EA;
+			background-color: #3853A4;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+			
+		.ButtonPurple{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #8e55c3;
+			background-color: #d9c6eb;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+			
+		.ButtonPurple:hover{	
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #d9c6eb;
+			background-color: #8e55c3;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+
+		.ButtonGreen{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: 	#29a356;
+			background-color: #bef4be;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+			
+		.ButtonGreen:hover{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #bef4be;
+			background-color: #29a356;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+		
+		.ButtonRed{					
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #EE2828;
+			background-color: #FBCDCD;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+			
+		.ButtonRed:hover{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 40px;
+			border: 0px solid black;
+			border-radius: 20px;
+			color: #FBCDCD;
+			background-color: #EE2828;
+			height: 75px;
+			width: 375px;
+			cursor: pointer;
+		}
+		
+		</style>
+		
+	</head>
+
+		
+	<body>
+	<br><br><br><br><br><br><br><br><br> <!-- This line adds spaces at the top of the page -->
+	
+	<div id="TopText">DIGITAL_DUNGEON <!-- This line centers the title but also just happens to center all of the buttons which is why it doesn't close until way later down. -->
+	
+	<br><br><br>
+
+    <div id="NormalText"> Select an option <br><br><br></div>
+
+	
+	<button class="ButtonBlue" onclick="window.location.href='createclass.html';"> Create Class </Play> </button> <br> 
+	
+	<div id="NormalText"> <br> </div>
+	
+	<button class="ButtonGreen" onclick="window.location.href='deleteclass.html';"> Delete Class </button> <br>
+
+    <div id="NormalText"> <br> </div>
+	
+	<button class="ButtonPurple" onclick="window.location.href='classes.html';"> View Classes </button> <br>
+
+    <div id="NormalText"> <br> </div>
+
+	<button class="ButtonRed" onclick="window.location.href='mainmenu.html';"> Main Menu </button> <br>
+
+    <div id="NormalText"> <br> </div>
+	
+	</div> <!-- This is where the part that centers DIGITAL_DUNGEON and everything else on the page is closed. -->
+	
+	</body> 
+	
+	
+</html>
