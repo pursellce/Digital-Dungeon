@@ -22,14 +22,47 @@
 			text-align: center;
 			font-size: 4.0vw;
 			}
-			
+		
 		#NormalText{
 			font-family:Consolas;
 			text-align: center;
 			font-size: 3.0vw;
 			color: grey;
 			}
-		
+
+			#Signin{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			color: grey;
+			}
+
+			.ButtonBlue{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #3853A4;
+			background-color: #D1D7EA;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+			
+		.ButtonBlue:hover{			
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #D1D7EA;
+			background-color: #3853A4;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+			
 			.ButtonRed{						
 			font-family:Consolas;
 			text-align: center;
@@ -64,14 +97,25 @@
 		<br><br><br><br><br><br><br><br><br> 
 	
 		<div id="TopText">LOGIN</div>
-		
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		
+
+		<br><br><br><br><br><br><br>
 		<div id="TopText">
+		<form id="Signin">
+			Username <br><input type="text" name="username"><br><br>
+			Password <br><input type="text" name="password"><br><br>
+		</form>
+		</div>
+		<div id="TopText">
+		<button class="ButtonBlue" onclick="window.location.href='mainmenu.html';"> 
+			<form action="mainmenu.html">
+			Submit
+		</button>
+
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
 			<form action="index.html">
-			Cancel 
+			Cancel
 		</button>
+		<br><br>
 		</div>
 		
 	</body>

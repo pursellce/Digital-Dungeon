@@ -29,7 +29,92 @@
 			font-size: 3.0vw;
 			color: grey;
 			}
-		
+
+		#Signin{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			color: grey;
+			}
+
+		.ButtonBlue{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #3853A4;
+			background-color: #D1D7EA;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+			
+		.ButtonBlue:hover{			
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #D1D7EA;
+			background-color: #3853A4;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+			
+		.ButtonPurple{				
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #6A52A2;
+			background-color: #DDD7E9;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+			
+		.ButtonPurple:hover{		
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #DDD7E9;
+			background-color: #6A52A2;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+
+		.ButtonGreen{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #2DB34B;
+			background-color: #CEEDD5;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+			
+		.ButtonGreen:hover{
+			font-family:Consolas;
+			text-align: center;
+			font-size: 2.5vw;
+			border: 0px solid black;
+			border-radius: 1.3vw;
+			color: #CEEDD5;
+			background-color: #2DB34B;
+			height: 4.8vw;
+			width: 19vw;
+			cursor: pointer;
+		}
+
 			.ButtonRed{						
 			font-family:Consolas;
 			text-align: center;
@@ -61,17 +146,38 @@
 	</head>
 	
 	<body>
-		<br><br><br><br><br><br><br><br><br> <!-- This line adds spaces at the top of the page -->
+		<br><br><br><br><br><br><br><br><br> 
 	
 		<div id="TopText">REGISTER</div>
-		
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		
-		<div id="TopText"> <!-- This line centers the button. Isn't actually used for any text. -->
-		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
-			<form action="index.html">
-			Cancel 
+
+		<br><br><br><br><br><br><br>
+
+		<div id="TopText">
+		<form id="Signin">
+			Username <br><input type="text" name="username"><br><br>
+			First Name <br><input type="text" name="fname"><br><br>
+			Last Name <br><input type="text" name="lname"><br><br>
+			Password <br><input type="text" name="password"><br><br>
+		</form>
+		<br>
+		<div id="NormalText"> Are you a TEACHER or STUDENT? <br><br><br></div>
+		<button class="ButtonPurple" onclick="window.location.href='mainmenu.html';"> 
+			<form action="mainmenu.html">
+			Teacher
 		</button>
+		<button class="ButtonGreen" onclick="window.location.href='mainmenu.html';"> 
+			<form action="mainmenu.html">
+			Student
+		</button>
+		<br><br>
+		<button class="ButtonBlue" onclick="window.location.href='login.html';"> 
+			<form action="login.html">
+			Login
+		</button>
+		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
+			Cancel
+		</button>
+		<br><br>
 		</div>
 		
 	</body>
