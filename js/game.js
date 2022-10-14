@@ -5,7 +5,7 @@ var myScore;
 
 function startGame() {
     myGamePiece = new component(30,30,"red",10,120,"icon", "images/icon.png");//30, 30, "red", 10, 120);
-    myGamePiece.gravity = 0.05;
+    //myGamePiece.gravity = 0.05;  // Commenting this out disables gravity. Will probably fully remove gravity later.
     myScore = new component("30px", "Consolas", "black", 280, 40, "text","");
     myGameArea.start();
 }
@@ -18,12 +18,21 @@ var myGameArea = {
         this.context = this.canvas.getContext("2d");/*2d here means a 2d landscape*/
         
         document.body.insertBefore(this.canvas, document.body.childNodes[25]);/*adjust node number to move game*/
-        this.canvas.style = "position:absolute; left: 50%; width: 400px; margin-left: -200px;";//center
+        this.canvas.style = "position:absolute; left: 50%; width: 800px; margin-left: -400px; margin-top: -300px; border:5px solid #000000;";//center
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
-        },
+        
+		
+		window.addEventListener('keydown', function (e) {		// Next 5 lines are a part of getting keyboard input.
+			myGameArea.key = e.keyCode;
+		})
+		window.addEventListener('keyup', function (e) {
+			myGameArea.key = false;
+		})
+	},
+		
     clear : function() {
-        this.context.fillStyle = "yellow";
+        this.context.fillStyle = "brown";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);//makes all pixels rectangle
     }
 }
@@ -94,6 +103,15 @@ function updateGameArea() {
         } 
     }
     myGameArea.clear();
+	
+	// Lines 105 - 110 are for picking up keyboard input and moving the player.
+	myGamePiece.speedX = 0;
+	myGamePiece.speedY = 0;
+	if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -1; }
+	if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 1; }		
+	if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -1; }
+	if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 1; }
+	
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
         x = myGameArea.canvas.width;
