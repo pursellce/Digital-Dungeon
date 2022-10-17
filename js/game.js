@@ -1,20 +1,34 @@
 
 var myGamePiece;
+var wall = [];
 var myObstacles = [];
 var myScore;
+var LastX;
+var LastY;
 
 function startGame() {
-    myGamePiece = new component(30,30,"red",10,120,"icon", "images/icon.png");//30, 30, "red", 10, 120);
+    myGamePiece = new component(30,30,"red",450,400,"icon", "images/player.png");//30, 30, "red", 10, 120);
     //myGamePiece.gravity = 0.05;  // Commenting this out disables gravity. Will probably fully remove gravity later.
     myScore = new component("30px", "Consolas", "black", 280, 40, "text","");
+	GenerateLevel1();
     myGameArea.start();
+}
+
+
+
+function GenerateLevel1() {
+	wall.push(new component(10, 540, "green", 0, 0, "icon", "images/wall.jpg"));
+	wall.push(new component(960, 10, "green", 0, 0, "icon", "images/wall.jpg"));
+	wall.push(new component(10, 540, "green", 950, 0, "icon", "images/wall.jpg"));
+	wall.push(new component(960, 10, "green", 0, 530, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 325, 165, "icon", "images/wall.jpg"));
 }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = 960;
+        this.canvas.height = 540;
         this.context = this.canvas.getContext("2d");/*2d here means a 2d landscape*/
         
         document.body.insertBefore(this.canvas, document.body.childNodes[25]);/*adjust node number to move game*/
@@ -24,11 +38,16 @@ var myGameArea = {
         
 		
 		window.addEventListener('keydown', function (e) {		// Next 5 lines are a part of getting keyboard input.
-			myGameArea.key = e.keyCode;
+			//myGameArea.key = e.keyCode;
+			myGameArea.keys = (myGameArea.keys || []);
+			myGameArea.keys[e.keyCode] = true;
 		})
 		window.addEventListener('keyup', function (e) {
-			myGameArea.key = false;
+			//myGameArea.key = false;
+			myGameArea.keys[e.keyCode] = false;
 		})
+		
+		
 	},
 		
     clear : function() {
@@ -102,18 +121,34 @@ function updateGameArea() {
             return;
         } 
     }
+	
+	for (i = 0; i < wall.length; i += 1) {
+        if (myGamePiece.crashWith(wall[i])) {
+            myGamePiece.speedX = 0;
+			myGamePiece.speedY = 0;
+			//return;
+        } 
+    }
+	
     myGameArea.clear();
 	
-	// Lines 105 - 110 are for picking up keyboard input and moving the player.
+	// Next 4 if lines are for picking up keyboard input and moving the player.
 	myGamePiece.speedX = 0;
 	myGamePiece.speedY = 0;
-	if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -1; }
-	if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 1; }		
-	if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -1; }
-	if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 1; }
+	/*if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -2; }
+	if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 2; }		
+	if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -2; }
+	if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 2; }*/
+	
+	if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -2; }
+    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 2; }
+    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -2; }
+    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 2; }
+	
+
 	
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+    /*if (myGameArea.frameNo == 1 || everyinterval(150)) {
         x = myGameArea.canvas.width;
         minHeight = 20;
         maxHeight = 200;
@@ -127,11 +162,32 @@ function updateGameArea() {
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
         myObstacles[i].update();
+    }*/
+	
+	for (i = 0; i < wall.length; i += 1) {
+		wall[i].update();
+	}
+	
+	for (i = 0; i < wall.length; i += 1) {
+        if (myGamePiece.crashWith(wall[i])) {
+            myGamePiece.x = LastX;
+			myGamePiece.y = LastY;
+			//myGamePiece.speedX = 0;
+			//myGamePiece.speedY = 0;
+			//return;
+        } 
     }
+	
+	LastX = myGamePiece.x;
+	LastY = myGamePiece.y;
+	
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
+	wall.update();
+	
+	
 }
 
 function everyinterval(n) {
