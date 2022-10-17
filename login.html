@@ -9,7 +9,6 @@
 		<link rel="icon" type="image/png" href="images/icon.png">
 		
 		<style type="text/css">
-		
 		body {
 			background-image: url('images/background.png');
 			background-repeat: no-repeat;
@@ -57,7 +56,7 @@
 			cursor: pointer;
 		}
 			
-			.ButtonRed{						
+		.ButtonRed{						
 			font-family:Consolas;
 			text-align: center;
 			font-size: 2.5vw;
@@ -84,33 +83,41 @@
 		}
 		
 		</style>
-		
+		<script>
+		function validateLogin(){
+			var x = document.forms["loginrForm"]["username"].value;
+			if(x == ""){
+				alert("Username required");
+				return false;
+			}
+			var y = document.forms["loginForm"]["inputPass"].value;
+			if(y == ""){
+				alert("Password required");
+				return false;
+			}
+			return true;
+		}
+		</script>
 	</head>
 	
 	<body>
 		<br><br>
-	
 		<div id="TopText">LOGIN</div>
 		<br><br>
 		<div id="TopText">
-		<form id="NormalText">
+		<form name="loginForm" id="NormalText" action="mainmenu.html">
 			Username <br><input type="text" name="username" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-			Password <br><input type="text" name="password" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
+			Password <br><input type="password" name="inputPass" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
+			<br><br>
+			<button class="ButtonBlue" onclick="return validateLogin();"> 
+				Submit
+			</button>
 		</form>
-		</div>
-		<div id="TopText">	
+		<br>
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
-			<form action="index.html">
 			Cancel
 		</button>
-		<button class="ButtonBlue" onclick="window.location.href='mainmenu.html';"> 
-			<form action="mainmenu.html">
-			Submit
-		</button>
-
-
 		<br><br>
 		</div>
-		
 	</body>
 </html>
