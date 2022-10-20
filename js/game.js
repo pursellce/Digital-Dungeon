@@ -1,29 +1,54 @@
 
+// Declaring variables. Any new objects added must be set up here.
 var myGamePiece;
 var wall = [];
 var myObstacles = [];
 var myScore;
+var Frame;
 var LastX;
 var LastY;
+var ladder;
+var treasure = [];
+var score = 0;
+var myUpBtn, myDownBtn, myLeftBtn, myRightBtn;
+
+
 
 function startGame() {
     myGamePiece = new component(30,30,"red",450,400,"icon", "images/player.png");//30, 30, "red", 10, 120);
     //myGamePiece.gravity = 0.05;  // Commenting this out disables gravity. Will probably fully remove gravity later.
     myScore = new component("30px", "Consolas", "black", 280, 40, "text","");
+	Frame = new component("30px", "Consolas", "grey", 510, 40, "text", "");
+	myUpBtn = new component(30, 30, "blue", 50, 10);
+	myDownBtn = new component(30, 30, "blue", 50, 70);
+	myLeftBtn = new component(30, 30, "blue", 20, 40);
+	myRightBtn = new component(30, 30, "blue", 80, 40);
 	GenerateLevel1();
     myGameArea.start();
 }
 
 
-
+// Function used to generate level 1.
 function GenerateLevel1() {
+	// (width, height, color, x, y, type, imag)
+	// First 4 walls drawn are the border walls. EVERY LEVEL MUST HAVE THESE!
 	wall.push(new component(10, 540, "green", 0, 0, "icon", "images/wall.jpg"));
 	wall.push(new component(960, 10, "green", 0, 0, "icon", "images/wall.jpg"));
 	wall.push(new component(10, 540, "green", 950, 0, "icon", "images/wall.jpg"));
 	wall.push(new component(960, 10, "green", 0, 530, "icon", "images/wall.jpg"));
+	
+	// Additional walls for the level's unique design.
 	wall.push(new component(100, 100, "green", 325, 165, "icon", "images/wall.jpg"));
+	
+	// Objects that the level has.
+	ladder = new component(30, 30, "red", 800, 400, "icon", "images/ladder.png");
+	treasure.push(new component(35, 35, "gold", 60, 100, "icon", "images/Treasure.png"));
+	treasure.push(new component(35, 35, "gold", 800, 200, "icon", "images/Treasure.png"));
+	// wall.push(new component(960, 10, "green", 100, 30, "icon", "images/Treasure.jpg"));
+	
 }
 
+// This section basically sets up the game window
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -37,7 +62,7 @@ var myGameArea = {
         this.interval = setInterval(updateGameArea, 20);
         
 		
-		window.addEventListener('keydown', function (e) {		// Next 5 lines are a part of getting keyboard input.
+		window.addEventListener('keydown', function (e) {		// Next few lines are a part of getting keyboard input.
 			//myGameArea.key = e.keyCode;
 			myGameArea.keys = (myGameArea.keys || []);
 			myGameArea.keys[e.keyCode] = true;
@@ -47,6 +72,23 @@ var myGameArea = {
 			myGameArea.keys[e.keyCode] = false;
 		})
 		
+		// Next 4 "window" statements are for detecting touch.
+		window.addEventListener('mousedown', function (e) {
+			myGameArea.x = e.pageX; //  - 550
+			myGameArea.y = e.pageY; //  - 211
+		})
+		window.addEventListener('mouseup', function (e) {
+			myGameArea.x = false;
+			myGameArea.y = false;
+		})
+		window.addEventListener('touchstart', function (e) {
+			myGameArea.x = e.pageX;
+			myGameArea.y = e.pageY;
+		})
+		window.addEventListener('touchend', function (e) {
+			myGameArea.x = false;
+			myGameArea.y = false;
+		})
 		
 	},
 		
@@ -56,6 +98,7 @@ var myGameArea = {
     }
 }
 
+// Component is basically how all objects get set up
 function component(width, height, color, x, y, type, imag) {
     this.type = type;
     this.score = 0;
@@ -112,8 +155,21 @@ function component(width, height, color, x, y, type, imag) {
         }
         return crash;
     }
+	
+	this.clicked = function() {
+    var myleft = this.x;
+    var myright = this.x + (this.width);
+    var mytop = this.y;
+    var mybottom = this.y + (this.height);
+    var clicked = true;
+    if ((mybottom < myGameArea.y) || (mytop > myGameArea.y) || (myright < myGameArea.x) || (myleft > myGameArea.x)) {
+      clicked = false;
+    }
+    return clicked;
+  }
 }
 
+// updateGameArea is the game loop. The game goes through here every frame to check things like if the player is holding an input down or if the player is colliding with an object.
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
@@ -122,6 +178,7 @@ function updateGameArea() {
         } 
     }
 	
+	// This is for handling collision with walls. More wall collisin related things further down.
 	for (i = 0; i < wall.length; i += 1) {
         if (myGamePiece.crashWith(wall[i])) {
             myGamePiece.speedX = 0;
@@ -132,20 +189,34 @@ function updateGameArea() {
 	
     myGameArea.clear();
 	
-	// Next 4 if lines are for picking up keyboard input and moving the player.
+	
 	myGamePiece.speedX = 0;
 	myGamePiece.speedY = 0;
-	/*if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -2; }
-	if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 2; }		
-	if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -2; }
-	if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 2; }*/
-	
+
+	// Next 4 if lines are for picking up keyboard input and moving the player.
 	if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -2; }
     if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 2; }
     if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -2; }
     if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 2; }
 	
+	
+	// Next group of if statements are for the on screen controls.
+	if (myGameArea.x && myGameArea.y) {
+    if (myUpBtn.clicked()) {
+      myGamePiece.y -= 2;
+    }
+    if (myDownBtn.clicked()) {
+      myGamePiece.y += 2;
+    }
+    if (myLeftBtn.clicked()) {
+      myGamePiece.x += -2;
+    }
+    if (myRightBtn.clicked()) {
+      myGamePiece.x += 2;
+    }
+  }
 
+	
 	
     myGameArea.frameNo += 1;
     /*if (myGameArea.frameNo == 1 || everyinterval(150)) {
@@ -163,7 +234,9 @@ function updateGameArea() {
         myObstacles[i].x += -1;
         myObstacles[i].update();
     }*/
-	
+
+
+	// Next two for loops are for handling collision with walls
 	for (i = 0; i < wall.length; i += 1) {
 		wall[i].update();
 	}
@@ -172,22 +245,37 @@ function updateGameArea() {
         if (myGamePiece.crashWith(wall[i])) {
             myGamePiece.x = LastX;
 			myGamePiece.y = LastY;
-			//myGamePiece.speedX = 0;
-			//myGamePiece.speedY = 0;
-			//return;
         } 
     }
 	
+	for (i = 0; i < treasure.length; i += 1) {
+		treasure[i].update();
+	}
+	
+	// This loop handles collision for treasure chests.
+	for (i = 0; i < treasure.length; i += 1) {
+        if (myGamePiece.crashWith(treasure[i])) {
+            myGamePiece.x = LastX;
+			myGamePiece.y = LastY;
+			score += 50;
+        } 
+    }
+	
+	// These two variables are for helping handle collision. They are used to set the player back to their previous position if a collision occures.
 	LastX = myGamePiece.x;
 	LastY = myGamePiece.y;
 	
-    myScore.text="SCORE: " + myGameArea.frameNo;
-    myScore.update();
+    Frame.text="FRAME: " + myGameArea.frameNo;
+    Frame.update();
+	myScore.text="SCORE: " + score;
+	myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
-	wall.update();
-	
-	
+	ladder.update();
+	myUpBtn.update();
+	myDownBtn.update();
+	myLeftBtn.update();
+	myRightBtn.update();
 }
 
 function everyinterval(n) {
