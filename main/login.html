@@ -88,12 +88,12 @@
 		</style>
 		<script>
 		function validateLogin(){
-			var x = document.forms["loginrForm"]["username"].value;
+			var x = document.getElementById('usernameID').value;
 			if(x == ""){
 				alert("Username required");
 				return false;
 			}
-			var y = document.forms["loginForm"]["inputPass"].value;
+			var y = document.getElementById('pswID').value;
 			if(y == ""){
 				alert("Password required");
 				return false;
@@ -109,8 +109,8 @@
 		<br><br>
 		<div id="TopText">
 		<form name="loginForm" id="NormalText" action="mainmenu.html">
-			Username <br><input type="text" name="username" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-			Password <br><input type="password" name="inputPass" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
+			Username <br><input type="text" name="username" id="usernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
+			Password <br><input type="password" name="psw" id="pswID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
 			<br><br>
 			<button class="ButtonBlue" onclick="return validateLogin();"> 
 				Submit

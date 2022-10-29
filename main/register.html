@@ -138,17 +138,19 @@
 		</style>
 		<script>
 		function validateTeacherForm(){
-			var x = document.forms["registerForm"]["username"].value;
+			var x = document.getElementById('usernameID').value;;
 			if(x == ""){
 				alert("Username required");
 				return false;
 			}
-			var y = document.forms["registerForm"]["password"].value;
+			var y = document.getElementById('pswID').value;
+			y.type='text';
 			if(y == ""){
 				alert("Password required");
 				return false;
 			}
-			var z = document.forms["registerForm"]["psw_repeat"].value;
+			var z = document.getElementById('psw_repeatID').value;
+			z.type='text';
 			if(y != z){
 				alert("Passwords do not match");
 				return false;
@@ -156,17 +158,17 @@
 			return true;
 		}
 		function validateStudentForm(){
-			var x = document.forms["registerForm"]["username"].value;
+			var x = document.getElementById('usernameID').value;
 			if(x == ""){
 				alert("Username required");
 				return false;
 			}
-			var y = document.forms["registerForm"]["psw"].value;
+			var y = document.getElementById('pswID').value;
 			if(y == ""){
 				alert("Password required");
 				return false;
 			}
-			var z = document.forms["registerForm"]["psw_repeat"].value;
+			var z = document.getElementById('psw_repeatID').value;
 			if(y != z){
 				alert("Passwords do not match");
 				return false;
@@ -186,13 +188,13 @@
 		<br><br>
 
 		<div id="TopText">
-		<form name="registerForm" id="NormalText" action="mainmenu.html">
-			Username <br><input type="text" name="username" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ><br><br>
-			Password <br><input type="password" name="psw" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-			Confirm Password <br><input type="password" name="psw_repeat" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
+		<form name="registerForm" id="NormalText" action="mainmenu.html" onsubmit="return verifyForm()">
+			Username <br><input type="text" name="username" id= "usernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ><br><br>
+			Password <br><input type="password" name="psw" id="pswID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
+			Confirm Password <br><input type="password" name="psw_repeat" id="psw_repeatID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
 		<br>
 		<div id="NormalText"> Are you a TEACHER or STUDENT? <br><br></div>
-		<button class="ButtonPurple" onclick="return validateTeacherForm();";> 
+		<button class="ButtonPurple" onclick="return validateTeacherForm();"> 
 			Teacher
 		</button>
 		<button class="ButtonGreen" onclick="return validateStudentForm();"> 
