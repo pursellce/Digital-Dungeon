@@ -133,6 +133,8 @@ function component(width, height, color, x, y, type, imag) {
     this.speedY = 0;    
     this.x = x;
     this.y = y;
+    this.crashed =false;
+    this.ans = "";
    
     this.imag = imag;
     this.gravity = 0;//do not remove
@@ -331,9 +333,17 @@ function updateGameArea() {
 
     myScore.text="SCORE: " + score;
 	myScore.update();
+
+    for(i = 0; i < question_count; i++)//stops movement while answering question
+    {
+        if((questionToken[i].crashed) && (questionToken[i].ans != "answer"))
+            {
+                myGamePiece.speedX = 0;
+                myGamePiece.speedY = 0;
+                //myGamePiece.newPos();
+            }
+    }
     myGamePiece.newPos();
-
-
     myGamePiece.update();
 	ladder.update();
     //myA.update();
