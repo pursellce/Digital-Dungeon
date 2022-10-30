@@ -5,7 +5,7 @@ var wall = [];
 var myObstacles = [];
 var myScore;
 var Frame;
-var LastX;
+var LastFrameXLocation;
 var LastY;
 //var q = [];
 var questionToken = [];
@@ -19,31 +19,6 @@ var myA, myB, myC, myD; //multiple choices
 var question_count = 3;
 var screenButton = 0;
 
-function moveup() {
-    myGamePiece.speedY -= 2; 
-	screenButton = 1;
-}
-
-function movedown() {
-    myGamePiece.speedY = 2;
-	screenButton = 1;
-}
-
-function moveleft() {
-    myGamePiece.speedX -= 2; 
-	screenButton = 1;
-}
-
-function moveright() {
-    myGamePiece.speedX += 2; 
-	screenButton = 1;
-}
-
-function stopMove() {
-  myGamePiece.speedX = 0;
-  myGamePiece.speedY = 0;
-  screenButton = 0;
-}
 
 function startGame() {
     myGamePiece = new component(30,30,"red",450,400,"icon", "images/player.png");//30, 30, "red", 10, 120);
@@ -275,6 +250,7 @@ function updateGameArea() {
 	
     myGameArea.clear();
 	
+	// This if statement makes sure that the next few lines are only applied for when the keyboard is being used and NOT when the on screen buttons are being used.
 	if (screenButton == 0)
 	{
 		myGamePiece.speedX = 0;
@@ -295,7 +271,7 @@ function updateGameArea() {
             if (myGameArea.keys && myGameArea.keys[66]) { questionToken[i].ans = "bad"; }//b
         }
     }
-	// Next group of if statements are for the on screen controls.
+	// Next group of if statements are for the OLD on screen controls.
 	if (myGameArea.x && myGameArea.y) {
     if (myUpBtn.clicked()) {
       myGamePiece.y -= 2;
@@ -338,48 +314,26 @@ function updateGameArea() {
 	
 	for (i = 0; i < wall.length; i += 1) {
         if (myGamePiece.crashWith(wall[i])) {
-            myGamePiece.x = LastX;
+            myGamePiece.x = LastFrameXLocation;
 			myGamePiece.y = LastY;
         } 
     }
 	
-	for (i = 0; i < treasure.length; i += 1) {
-		treasure[i].update();
-	}
-
-	// This loop handles collision for treasure chests.
-	for (i = 0; i < treasure.length; i += 1) {
-        if (myGamePiece.crashWith(treasure[i])) {
-            myGamePiece.x = LastX;
-			myGamePiece.y = LastY;
-			score += 50;
-            //question.update();
-        } 
-    }
+	UpdateAndCheckTreasure();
 	
 	// These two variables are for helping handle collision. They are used to set the player back to their previous position if a collision occures.
-	LastX = myGamePiece.x;
+	LastFrameXLocation = myGamePiece.x;
 	LastY = myGamePiece.y;
 	
     Frame.text="FRAME: " + myGameArea.frameNo;
     Frame.update();
-    //myA.text="right";
-    //myB.text="wrong";
-    //myC.text="wrong";
-    //myD.text="wrong";
+
 
     myScore.text="SCORE: " + score;
 	myScore.update();
     myGamePiece.newPos();
 
-    questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3";
-    questionToken[1].text = "What is the logical and symbol? Press A for &&, B for ||";
-    questionToken[2].text = "What will 0010 ^ 1001 give? A for 1011, B for 1101";
-    for(i = 0; i < question_count;i++)//update all questions
-    {
-        //q[i].update();
-        questionToken[i].update();
-    }
+
     myGamePiece.update();
 	ladder.update();
     //myA.update();
@@ -389,6 +343,32 @@ function updateGameArea() {
 	myDownBtn.update();
 	myLeftBtn.update();
 	myRightBtn.update();
+	
+	//myA.text="right";
+    //myB.text="wrong";
+    //myC.text="wrong";
+    //myD.text="wrong";
+	
+	questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3";
+    questionToken[1].text = "What is the logical and symbol? Press A for &&, B for ||";
+    questionToken[2].text = "What will 0010 ^ 1001 give? A for 1011, B for 1101";
+    for(i = 0; i < question_count;i++)//update all questions
+    {
+        //q[i].update();
+        questionToken[i].update();
+    }
+}
+
+function UpdateAndCheckTreasure(){
+	for (i = 0; i < treasure.length; i += 1) {
+        if (myGamePiece.crashWith(treasure[i])) {
+            myGamePiece.x = LastFrameXLocation;
+			myGamePiece.y = LastY;
+			score += 50;
+            //question.update();
+        } 
+		treasure[i].update();
+    }
 }
 
 function everyinterval(n) {
@@ -398,4 +378,30 @@ function everyinterval(n) {
 
 function accelerate(n) {
     myGamePiece.gravity = n;
+}
+
+function moveup() {
+    myGamePiece.speedY -= 2; 
+	screenButton = 1;
+}
+
+function movedown() {
+    myGamePiece.speedY = 2;
+	screenButton = 1;
+}
+
+function moveleft() {
+    myGamePiece.speedX -= 2; 
+	screenButton = 1;
+}
+
+function moveright() {
+    myGamePiece.speedX += 2; 
+	screenButton = 1;
+}
+
+function stopMove() {
+  myGamePiece.speedX = 0;
+  myGamePiece.speedY = 0;
+  screenButton = 0;
 }
