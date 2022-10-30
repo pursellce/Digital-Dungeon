@@ -79,7 +79,7 @@ var myGameArea = {
         this.context = this.canvas.getContext("2d");/*2d here means a 2d landscape*/
         
         document.body.insertBefore(this.canvas, document.body.childNodes[25]);/*adjust node number to move game*/
-        this.canvas.style = "position:absolute; left: 50%; width: 800px; margin-left: -400px; margin-top: -300px; border:5px solid #000000;";//center
+        this.canvas.style = "position:absolute; left: 30%; width: 40%; height: 45%; text-align:center; top: 25%; border:5px solid #000000;";//center
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
         

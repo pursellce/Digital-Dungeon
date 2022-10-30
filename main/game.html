@@ -13,7 +13,7 @@
 		@font-face { font-family: Consolas; src: url('Consolas.ttf'); }
 		
 		body {
-			background-image: url('images/background.png');
+			background-image: url('images/Game_Background.png');
 			background-repeat: no-repeat;
 			background-attachment: fixed;
 			background-size: 100% 100%;
@@ -67,22 +67,20 @@
 	</head>
 	
 	<body>
-		<p style="font-size:1.7vw"><br></p> <!-- This line adds spaces at the top of the page -->
-	
-		<div id="TopText">DIGITAL_DUNGEON</div>
+
 		
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<body onload="startGame()">
 			<script src="js/game.js"></script>
 		
 		
 		
-		<div id="TopText"> <!-- This line centers the button. Isn't actually used for any text -->
+		<div style="position: absolute; left: 40%; top: 78%;">
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
 			<form action="index.html">
 			Main Menu 
 		</button>
 		</div>
+		
 		
 	</body>
 </html>
