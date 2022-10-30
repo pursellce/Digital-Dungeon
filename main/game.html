@@ -62,12 +62,22 @@
 			cursor: pointer;
 		}
 		
+		.ButtonUp{
+		
+		background-image: url('images/UpArrow.png');
+		}
+		
+		img {
+			width: 100%;
+			height: 100%;
+			}
+		
 		</style>
 		
 	</head>
 	
 	<body>
-
+		
 		
 		<body onload="startGame()">
 			<script src="js/game.js"></script>
@@ -76,10 +86,15 @@
 		
 		<div style="position: absolute; left: 40%; top: 78%;">
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
-			<form action="index.html">
+			<!--<form action="index.html">-->
 			Main Menu 
 		</button>
 		</div>
+		<!--<div style="position: absolute; text-align:center; left: 10%; top: 70%;">-->
+			<button style="position: absolute; text-align:center; left: 16.5%; top: 35%; width: 6%; height: 10%" onmousedown="moveup()" onmouseup="stopMove()" ontouchstart="moveup()"><img src="images/UpArrow.png"></button>
+			<button style="position: absolute; text-align:center; left: 16.5%; top: 55%; width: 6%; height: 10%" onmousedown="movedown()" onmouseup="stopMove()" ontouchstart="movedown()"><img src="images/DownArrow.png"></button>
+			<button style="position: absolute; text-align:center; left: 10.5%; top: 45%; width: 6%; height: 10%" onmousedown="moveleft()" onmouseup="stopMove()" ontouchstart="moveleft()"><img src="images/LeftArrow.png"></button>
+			<button style="position: absolute; text-align:center; left: 22.5%; top: 45%; width: 6%; height: 10%" onmousedown="moveright()" onmouseup="stopMove()" ontouchstart="moveright()"><img src="images/RightArrow.png"></button>
 		
 		
 	</body>

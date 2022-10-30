@@ -17,6 +17,34 @@ var myUpBtn, myDownBtn, myLeftBtn, myRightBtn;
 var myA, myB, myC, myD; //multiple choices
 //var crashed;
 var question_count = 3;
+var screenButton = 0;
+
+function moveup() {
+    myGamePiece.speedY -= 2; 
+	screenButton = 1;
+}
+
+function movedown() {
+    myGamePiece.speedY = 2;
+	screenButton = 1;
+}
+
+function moveleft() {
+    myGamePiece.speedX -= 2; 
+	screenButton = 1;
+}
+
+function moveright() {
+    myGamePiece.speedX += 2; 
+	screenButton = 1;
+}
+
+function stopMove() {
+  myGamePiece.speedX = 0;
+  myGamePiece.speedY = 0;
+  screenButton = 0;
+}
+
 function startGame() {
     myGamePiece = new component(30,30,"red",450,400,"icon", "images/player.png");//30, 30, "red", 10, 120);
     //myGamePiece.gravity = 0.05;  // Commenting this out disables gravity. Will probably fully remove gravity later.
@@ -247,9 +275,11 @@ function updateGameArea() {
 	
     myGameArea.clear();
 	
-	
-	myGamePiece.speedX = 0;
-	myGamePiece.speedY = 0;
+	if (screenButton == 0)
+	{
+		myGamePiece.speedX = 0;
+		myGamePiece.speedY = 0;
+	}
 
 	// Next 4 if lines are for picking up keyboard input and moving the player.
 	if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -2; }
