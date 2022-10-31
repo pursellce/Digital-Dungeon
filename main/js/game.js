@@ -16,7 +16,7 @@ var score = 0;
 var myUpBtn, myDownBtn, myLeftBtn, myRightBtn;
 var myA, myB, myC, myD; //multiple choices
 //var crashed;
-var question_count = 3;
+var question_count = 4;
 var screenButton = 0;
 
 
@@ -135,8 +135,9 @@ function component(width, height, color, x, y, type, imag) {
     this.y = y;
     this.crashed =false;
     this.ans = "";
-   
+    this.text_spot=0;
     this.imag = imag;
+    this.done = false;
     this.gravity = 0;//do not remove
     this.gravitySpeed = 0;//do not remove
     this.update = function() {
@@ -177,12 +178,36 @@ function component(width, height, color, x, y, type, imag) {
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             }
             else{
-                if((this.crashed) && (this.ans != "answer"))//display question as long as wrong answer
+                if((this.crashed) && (this.ans != this.correct)&& !this.done)//display question as long as wrong answer
                 {   
-                    ctx.font = this.width + " " + this.height;//not sure why text is large
+                    ctx.fillStyle = 'rgb(151, 100, 90)';//text box values
+                    ctx.fillRect(60, 420, 840, 100); 
+
+                    ctx.font = "25px consolas";//adust to change font 
                     ctx.fillStyle = color;
-                    ctx.fillText(this.text, this.x, this.y); 
+                    var linestart = 450;
+                    
+                   /* while(this.text_spot < this.text.length)
+                    {
+                       // if(this.text.substring(i)=='#')
+                         //   {linestart += 20;}
+                        if((myGameArea.frameNo % 100) == 0)
+                            {this.text_spot++;}
+                        else{
+                            break;}
+                        ctx.fillText(this.text.substring(0,this.text_spot), 70,linestart );//this.x, this.y);
+                        
+                    }
+                    if(this.text_spot == this.text.length)
+                        {
+                            ctx.fillText(this.text.substring(0,this.text_spot), 70,linestart );//this.x, this.y);
+                        } */
+
+                        ctx.fillText(this.text.substring(0,60), 70,linestart );//line 1
+                        ctx.fillText(this.text.substring(61,121), 70,linestart+30);//line 2
+                        ctx.fillText(this.text.substring(122,183), 70,linestart+60);//line 3
                 }
+                if(this.ans == this.correct){this.done = true;}
 
             }
         }else {
@@ -268,9 +293,11 @@ function updateGameArea() {
     //for questions
     for(i = 0; i < question_count; i++)//needs work
     {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
-        if(myGamePiece.crashWith( questionToken[i])){
-            if (myGameArea.keys && myGameArea.keys[65]) { questionToken[i].ans = "answer"; }//currently only marks A as right answer
-            if (myGameArea.keys && myGameArea.keys[66]) { questionToken[i].ans = "bad"; }//b
+        if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
+            if (myGameArea.keys && myGameArea.keys[65]) { questionToken[i].ans = "A"; }//
+            else if (myGameArea.keys && myGameArea.keys[66]) { questionToken[i].ans = "B"; }//b
+            else if (myGameArea.keys && myGameArea.keys[67]) { questionToken[i].ans = "C"; }//
+            else if (myGameArea.keys && myGameArea.keys[68]) { questionToken[i].ans = "D"; }
         }
     }
 	// Next group of if statements are for the OLD on screen controls.
@@ -336,7 +363,7 @@ function updateGameArea() {
 
     for(i = 0; i < question_count; i++)//stops movement while answering question
     {
-        if((questionToken[i].crashed) && (questionToken[i].ans != "answer"))
+        if((questionToken[i].crashed) && (questionToken[i].ans != questionToken[i].correct))
             {
                 myGamePiece.speedX = 0;
                 myGamePiece.speedY = 0;
@@ -359,9 +386,15 @@ function updateGameArea() {
     //myC.text="wrong";
     //myD.text="wrong";
 	
-	questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3";
-    questionToken[1].text = "What is the logical and symbol? Press A for &&, B for ||";
-    questionToken[2].text = "What will 0010 ^ 1001 give? A for 1011, B for 1101";
+	questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3, c for 2, D for 1";
+    questionToken[0].correct = "A";
+    questionToken[1].text = "What is the logical and symbol? Press A for ||, B for &&, Press C for |, D for & ";
+    questionToken[1].correct = "B";
+    questionToken[2].text = "What will 0010 ^ 1001 give? A for 0000, B for 1101, C for 1011, D for 1101";
+    questionToken[2].correct = "C";
+    questionToken[3].text = "What will 0010 + 1001 give? A for 0000, B for 1101, C for 1111, D for 1011";
+    questionToken[3].correct = "D";
+
     for(i = 0; i < question_count;i++)//update all questions
     {
         //q[i].update();
