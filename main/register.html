@@ -191,8 +191,25 @@
 		<form name="registerForm" id="NormalText" action="mainmenu.html" onsubmit="return verifyForm()">
 			Username <br><input type="text" name="username" id= "usernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ><br><br>
 			Password <br><input type="password" name="psw" id="pswID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-			Confirm Password <br><input type="password" name="psw_repeat" id="psw_repeatID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-		<br>
+			Confirm Password <br><input type="password" name="psw_repeat" id="psw_repeatID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
+			<input type = "checkbox" id= "toggle" style="height:1.75vw; width:1.75vw"/>Show Passwords
+			<script>
+				document.querySelector('#toggle').addEventListener("click", togglePass);
+				function togglePass(){
+					var pswEle = document.getElementById("pswID");
+					var psw_repeatEle = document.getElementById("psw_repeatID");
+					if(pswEle.type === "password" && psw_repeatEle.type === "password"){
+						pswEle.type = "text";
+						psw_repeatEle.type = "text";
+					}
+					else{
+						pswEle.type = "password";
+						psw_repeatEle.type = "password";
+					}
+				}
+			</script>
+
+		<br><br>
 		<div id="NormalText"> Are you a TEACHER or STUDENT? <br><br></div>
 		<button class="ButtonPurple" onclick="return validateTeacherForm();"> 
 			Teacher
