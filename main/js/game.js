@@ -7,15 +7,12 @@ var myScore;
 var Frame;
 var LastFrameXLocation;
 var LastY;
-//var q = [];
 var questionToken = [];
-//var answered = false;
 var ladder;
 var treasure = [];
 var score = 0;
 var myUpBtn, myDownBtn, myLeftBtn, myRightBtn;
 var myA, myB, myC, myD; //multiple choices
-//var crashed;
 var question_count = 4;
 var screenButton = 0;
 
@@ -30,14 +27,12 @@ function startGame() {
 	myDownBtn = new component(30, 30, "blue", 50, 70);
 	myLeftBtn = new component(30, 30, "blue", 20, 40);
 	myRightBtn = new component(30, 30, "blue", 80, 40);
-    
-    //q[1].ans = "bad"
-    
+
     //myA = new component(100,30, "black", 315, 403);
 	//myB = new component("30px", "black", 310, 50,"text" );
 	//myC = new component("30px", "black", 310, 90,"text");
 	//myD = new component("30px", "black", 310, 130,"text");
-    //crashed = false;
+
 	GenerateLevel1();
     myGameArea.start();
 }
@@ -57,14 +52,12 @@ function GenerateLevel1() {
 	
     for(i = 0; i < question_count; i++)//making all question tokens
     {
-        //q.push(new component("20px", "Consolas", "grey",300,300-i*20, "question","This is the question"));
-    //q.push(new component("20px", "Consolas", "grey",200,200, "question","This is the question"));
 	    questionToken.push(new component(15,15,"gold", 400+i*40, 400-i*18,"token"));
     }
     for(i = 0; i < question_count;i++)//marks all crashes for tokens as false initially
     {
         questionToken[i].crashed = false;
-    }//questionToken.push(new component(20,20,"gold", rand()%400, rand()%400));
+    }
 	// Objects that the level has.
 	ladder = new component(30, 30, "red", 800, 400, "icon", "images/ladder.png");
 	treasure.push(new component(35, 35, "gold", 60, 100, "icon", "images/Treasure.png"));
@@ -147,38 +140,20 @@ function component(width, height, color, x, y, type, imag) {
             ctx.fillStyle = color;
             ctx.fillText(this.text, this.x, this.y);
         }
-        else if (this.type == "question"){//this function is no longer used
-            
-            //ctx.font = this.width + " " + this.height;
-            //ctx.fillStyle = color;
-            //if(myGamePiece.crashWith(questionToken))
-               //{ crashed = true;}
-            //if((crashed) && (this.ans != "answer"))
-            //{   
-                /*while(i < this.text.length())
-                {    
-                    ctx.fillText(this.text.substring(0,i), this.x, this.y);
-                    i++;
-                }*/
-                //ctx.fillText(this.text, this.x, this.y);
-                
-            //}
 
-            
-        } 
         else if (this.type == "icon") {
             const img = new Image();//creating image
             img.src = this.imag;//to load in image 
             ctx.drawImage(img, this.x, this.y, this.width, this.height);//drawing image
         } else if(this.type == "token") {//need a way to stop movement so multiple questions arent displayed
-            if(myGamePiece.crashWith(this))
+            if(this.crashWith(myGamePiece))
                {this.crashed = true;}
             if(!(this.crashed)){//if not crashed display token
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             }
-            else{
-                if((this.crashed) && (this.ans != this.correct)&& !this.done)//display question as long as wrong answer
+            else{ 
+            if((this.ans != this.correct) && !this.done)//display question as long as wrong answer
                 {   
                     ctx.fillStyle = 'rgb(151, 100, 90)';//text box values
                     ctx.fillRect(60, 420, 840, 100); 
@@ -203,9 +178,9 @@ function component(width, height, color, x, y, type, imag) {
                             ctx.fillText(this.text.substring(0,this.text_spot), 70,linestart );//this.x, this.y);
                         } */
 
-                        ctx.fillText(this.text.substring(0,60), 70,linestart );//line 1
-                        ctx.fillText(this.text.substring(61,121), 70,linestart+30);//line 2
-                        ctx.fillText(this.text.substring(122,183), 70,linestart+60);//line 3
+                    ctx.fillText(this.text.substring(0,60), 70,linestart );//line 1
+                    ctx.fillText(this.text.substring(61,121), 70,linestart+30);//line 2
+                    ctx.fillText(this.text.substring(122,183), 70,linestart+60);//line 3
                 }
                 if(this.ans == this.correct){this.done = true;}
 
@@ -337,10 +312,7 @@ function updateGameArea() {
 
 
 	// Next two for loops are for handling collision with walls
-	for (i = 0; i < wall.length; i += 1) {
-		wall[i].update();
-	}
-	
+
 	for (i = 0; i < wall.length; i += 1) {
         if (myGamePiece.crashWith(wall[i])) {
             myGamePiece.x = LastFrameXLocation;
@@ -348,18 +320,12 @@ function updateGameArea() {
         } 
     }
 	
-	UpdateAndCheckTreasure();
+
 	
 	// These two variables are for helping handle collision. They are used to set the player back to their previous position if a collision occures.
 	LastFrameXLocation = myGamePiece.x;
 	LastY = myGamePiece.y;
-	
-    Frame.text="FRAME: " + myGameArea.frameNo;
-    Frame.update();
 
-
-    myScore.text="SCORE: " + score;
-	myScore.update();
 
     for(i = 0; i < question_count; i++)//stops movement while answering question
     {
@@ -367,26 +333,11 @@ function updateGameArea() {
             {
                 myGamePiece.speedX = 0;
                 myGamePiece.speedY = 0;
-                //myGamePiece.newPos();
+
             }
     }
-    myGamePiece.newPos();
-    myGamePiece.update();
-	ladder.update();
-    //myA.update();
-    //myB.update();
-
-	myUpBtn.update();
-	myDownBtn.update();
-	myLeftBtn.update();
-	myRightBtn.update();
-	
-	//myA.text="right";
-    //myB.text="wrong";
-    //myC.text="wrong";
-    //myD.text="wrong";
-	
-	questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3, c for 2, D for 1";
+    updateAllElements();//calls all of the updates
+    questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3, c for 2, D for 1";
     questionToken[0].correct = "A";
     questionToken[1].text = "What is the logical and symbol? Press A for ||, B for &&, Press C for |, D for & ";
     questionToken[1].correct = "B";
@@ -395,11 +346,32 @@ function updateGameArea() {
     questionToken[3].text = "What will 0010 + 1001 give? A for 0000, B for 1101, C for 1111, D for 1011";
     questionToken[3].correct = "D";
 
+}
+
+function updateAllElements(){
     for(i = 0; i < question_count;i++)//update all questions
     {
         //q[i].update();
         questionToken[i].update();
     }
+    for (i = 0; i < wall.length; i += 1) {
+		wall[i].update();
+	}
+	
+    Frame.text="FRAME: " + myGameArea.frameNo;
+    Frame.update();
+
+
+    myScore.text="SCORE: " + score;
+	myScore.update();
+    myGamePiece.newPos();
+    myGamePiece.update();
+	ladder.update();
+    UpdateAndCheckTreasure();
+	myUpBtn.update();
+	myDownBtn.update();
+	myLeftBtn.update();
+	myRightBtn.update();
 }
 
 function UpdateAndCheckTreasure(){
