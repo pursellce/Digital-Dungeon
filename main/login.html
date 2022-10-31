@@ -100,6 +100,16 @@
 			}
 			return true;
 		}
+
+		function togglePSW(){
+			var p = document.getElementById('pswID').value;
+			if(x.type === "password"){
+				x.type = "text";
+			}
+			else{
+				x.type = "password";
+			}
+		}
 		</script>
 	</head>
 	
@@ -111,6 +121,8 @@
 		<form name="loginForm" id="NormalText" action="mainmenu.html">
 			Username <br><input type="text" name="username" id="usernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
 			Password <br><input type="password" name="psw" id="pswID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
+			<br>
+			<input type = "checkbox" id = "pswVisCheck" style="height: 1.5vw; width: 1.5vw" onlcikk="togglePSW()"> Show Password
 			<br><br>
 			<button class="ButtonBlue" onclick="return validateLogin();"> 
 				Submit
