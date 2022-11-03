@@ -26,7 +26,7 @@
       
       
       body {
-        background-image: url('images/background.png');
+        background-image: url('images/WelcomeBackground.png');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100% 100%;
@@ -167,24 +167,22 @@
   <body>
     <p style="font-size:1.7vw"><br></p> <!-- This line adds spaces at the top of the page -->
 	
-    <div id="TopText">DIGITAL_DUNGEON<!-- This line centers the title but also just happens to center all of the buttons which is why it doesn't close until way later down. -->
+    <!--<div id="TopText">DIGITAL_DUNGEON<!-- This line centers the title but also just happens to center all of the buttons which is why it doesn't close until way later down. -->
     
     <br><br>
-    
+    <div style="position: absolute; left: 40%; top: 26%;">
     <button class="ButtonBlue" onclick="window.location.href='login.html';"> Login </button> <br> 
+	</div>
     
     <div id="NormalText"> <br> </div>
-    
+    <div style="position: absolute; left: 40%; top: 41%;">
     <button class="ButtonPurple" onclick="window.location.href='register.html';"> Register </button> <br><br>
+    </div>
     
+    <!--<div id="NormalText"> // If you just want to <strong>try</strong> the game. <br><br></div>-->
     
-    <div id="NormalText"> // If you just want to <strong>try</strong> the game. <br><br></div>
-    
-    <button class="ButtonRed" onclick="window.location.href='game.html';"> 
-    
-    Guest 
-    </button> <br><br>
-    
+	<div style="position: absolute; left: 40%; top: 72%;">
+    <button class="ButtonRed" onclick="window.location.href='game.html';">Guest </button> <br><br>
     </div> <!-- This is where the part that centers DIGITAL_DUNGEON and everything else on the page is closed. -->
 
     <script>
