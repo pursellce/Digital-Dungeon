@@ -15,12 +15,14 @@ var myUpBtn, myDownBtn, myLeftBtn, myRightBtn;
 var myA, myB, myC, myD; //multiple choices
 var question_count = 4;
 var screenButton = 0;
+var darkness;
 
 
 function startGame() {
     myGamePiece = new component(30,30,"red",450,400,"icon", "images/player.png");//30, 30, "red", 10, 120);
+	darkness = new component(2000,2000,"red",-500,-500,"icon", "images/"); // Darkness.png  	RE-ADD THIS TO RE-ADD DARKNESS!!!!!!!!!!!!!!!!!!
     //myGamePiece.gravity = 0.05;  // Commenting this out disables gravity. Will probably fully remove gravity later.
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text","");
+    myScore = new component("30px", "Consolas", "white", 280, 40, "text","");
 
     Frame = new component("30px", "Consolas", "grey", 510, 40, "text", "");
 	myUpBtn = new component(30, 30, "blue", 50, 10);
@@ -336,7 +338,9 @@ function updateGameArea() {
 
             }
     }
-    updateAllElements();//calls all of the updates
+	darkness.x = myGamePiece.x - 990;
+	darkness.y = myGamePiece.y - 940;
+    
     questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3, c for 2, D for 1";
     questionToken[0].correct = "A";
     questionToken[1].text = "What is the logical and symbol? Press A for ||, B for &&, Press C for |, D for & ";
@@ -345,8 +349,51 @@ function updateGameArea() {
     questionToken[2].correct = "C";
     questionToken[3].text = "What will 0010 + 1001 give? A for 0000, B for 1101, C for 1111, D for 1011";
     questionToken[3].correct = "D";
+	
+	updateAllElements();//calls all of the updates
 
 }
+
+// Function for when the player clicks the A button on screen.
+function AnswerA(){
+	for(i = 0; i < question_count; i++)//needs work
+    {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
+        if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
+            questionToken[i].ans = "A";//   
+        }
+    }
+}
+
+// Function for when the player clicks the B button on screen.
+function AnswerB(){
+	for(i = 0; i < question_count; i++)//needs work
+    {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
+        if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
+            questionToken[i].ans = "B";//   
+        }
+    }
+}
+
+// Function for when the player clicks the C button on screen.
+function AnswerC(){
+	for(i = 0; i < question_count; i++)//needs work
+    {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
+        if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
+            questionToken[i].ans = "C";//   
+        }
+    }
+}
+
+// Function for when the player clicks the D button on screen.
+function AnswerD(){
+	for(i = 0; i < question_count; i++)//needs work
+    {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
+        if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
+            questionToken[i].ans = "D";//   
+        }
+    }
+}
+
 
 function updateAllElements(){
     for(i = 0; i < question_count;i++)//update all questions
@@ -358,16 +405,19 @@ function updateAllElements(){
 		wall[i].update();
 	}
 	
-    Frame.text="FRAME: " + myGameArea.frameNo;
-    Frame.update();
+    
 
 
-    myScore.text="SCORE: " + score;
-	myScore.update();
+    
     myGamePiece.newPos();
     myGamePiece.update();
 	ladder.update();
     UpdateAndCheckTreasure();
+	darkness.update();
+	Frame.text="FRAME: " + myGameArea.frameNo;
+    Frame.update();
+	myScore.text="SCORE: " + score;
+	myScore.update();
 	myUpBtn.update();
 	myDownBtn.update();
 	myLeftBtn.update();
