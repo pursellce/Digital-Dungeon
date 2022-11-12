@@ -77,8 +77,7 @@ function GenerateLevel1() {
         questionToken[i].crashed = false;
     }
 	// Objects that the level has.
-	ladder = new component(30, 30, "red", 900, 400, "icon", "images/ladder.png");
-	ladder = new component(30, 30, "gold", 900, 400, "icon", "images/ladder.png");
+	ladder = new component(30, 30, "red", 900, 400, "icon", "images/Ladder.png");
 	treasure.push(new component(35, 35, "gold", 555, 280, "icon", "images/Treasure.png"));
 	treasure.push(new component(35, 35, "gold", 60, 100, "icon", "images/Treasure.png"));
 	treasure.push(new component(35, 35, "gold", 60, 280, "icon", "images/Treasure.png"));
