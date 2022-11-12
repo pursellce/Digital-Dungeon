@@ -16,6 +16,8 @@ var myA, myB, myC, myD; //multiple choices
 var question_count = 4;
 var screenButton = 0;
 var darkness;
+var TotalLevels = 2;
+var CurrentLevel = 1;
 
 
 function startGame() {
@@ -25,10 +27,10 @@ function startGame() {
     myScore = new component("30px", "Consolas", "white", 280, 40, "text","");
 
     Frame = new component("30px", "Consolas", "grey", 510, 40, "text", "");
-	myUpBtn = new component(30, 30, "blue", 50, 10);
+	/*myUpBtn = new component(30, 30, "blue", 50, 10);
 	myDownBtn = new component(30, 30, "blue", 50, 70);
 	myLeftBtn = new component(30, 30, "blue", 20, 40);
-	myRightBtn = new component(30, 30, "blue", 80, 40);
+	myRightBtn = new component(30, 30, "blue", 80, 40);*/
 
     //myA = new component(100,30, "black", 315, 403);
 	//myB = new component("30px", "black", 310, 50,"text" );
@@ -88,6 +90,27 @@ function GenerateLevel1() {
 
 }
 
+// Function used to generate level 2.
+function GenerateLevel2() {
+	
+	ladder.x = 100;
+	ladder.y = 100;
+	
+	// First 4 walls drawn are the border walls. EVERY LEVEL MUST HAVE THESE!
+	wall.push(new component(10, 540, "green", 0, 0, "icon", "images/wall.jpg"));
+	wall.push(new component(960, 10, "green", 0, 0, "icon", "images/wall.jpg"));
+	wall.push(new component(10, 540, "green", 950, 0, "icon", "images/wall.jpg"));
+	wall.push(new component(960, 10, "green", 0, 530, "icon", "images/wall.jpg"));
+
+}
+
+// Function used to wipe level assets so that a new level layout can be generated.
+function ClearLevel() {
+	wall.length = 0;
+	treasure.length = 0;
+}
+	
+
 // This section basically sets up the game window
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -113,7 +136,7 @@ var myGameArea = {
 		})
 		
 		// Next 4 "window" statements are for detecting touch.
-		window.addEventListener('mousedown', function (e) {
+		/*window.addEventListener('mousedown', function (e) {
 			myGameArea.x = e.pageX; //  - 550
 			myGameArea.y = e.pageY; //  - 211
 		})
@@ -128,7 +151,7 @@ var myGameArea = {
 		window.addEventListener('touchend', function (e) {
 			myGameArea.x = false;
 			myGameArea.y = false;
-		})
+		})*/
 		
 	},
 		
@@ -333,7 +356,7 @@ function updateGameArea() {
     myGameArea.frameNo += 1;
 
 
-	// Next two for loops are for handling collision with walls
+	// Next for loop is for handling collision with walls.
 
 	for (i = 0; i < wall.length; i += 1) {
         if (myGamePiece.crashWith(wall[i])) {
@@ -341,6 +364,22 @@ function updateGameArea() {
 			myGamePiece.y = LastY;
         } 
     }
+	
+	
+	// Next if statements are for handling collision with ladders.
+	
+	if (myGamePiece.crashWith(ladder))
+	{
+		if (CurrentLevel != TotalLevels)
+		{
+			CurrentLevel += 1;
+			ClearLevel();
+			if (CurrentLevel == 2)
+			{
+				GenerateLevel2();
+			}
+		}
+	}
 	
 
 	
