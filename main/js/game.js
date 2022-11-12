@@ -51,6 +51,22 @@ function GenerateLevel1() {
 	
 	// Additional walls for the level's unique design.
 	wall.push(new component(100, 100, "green", 325, 165, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 425, 165, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 525, 165, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 425, 265, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 525, 65, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 325, 10, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 150, 430, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 150, 270, "icon", "images/wall.jpg"));
+	wall.push(new component(240, 100, "green", 10, 170, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 150, 70, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 695, 10, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 695, 110, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 625, 265, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 170, "green", 625, 365, "icon", "images/wall.jpg"));
+	wall.push(new component(165, 100, "green", 785, 265, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 785, 365, "icon", "images/wall.jpg"));
+	wall.push(new component(100, 100, "green", 850, 85, "icon", "images/wall.jpg"));
 	
     for(i = 0; i < question_count; i++)//making all question tokens
     {
@@ -61,9 +77,13 @@ function GenerateLevel1() {
         questionToken[i].crashed = false;
     }
 	// Objects that the level has.
-	ladder = new component(30, 30, "red", 800, 400, "icon", "images/ladder.png");
+	ladder = new component(30, 30, "red", 900, 400, "icon", "images/ladder.png");
+	treasure.push(new component(35, 35, "gold", 555, 280, "icon", "images/Treasure.png"));
 	treasure.push(new component(35, 35, "gold", 60, 100, "icon", "images/Treasure.png"));
-	treasure.push(new component(35, 35, "gold", 800, 200, "icon", "images/Treasure.png"));
+	treasure.push(new component(35, 35, "gold", 60, 280, "icon", "images/Treasure.png"));
+	treasure.push(new component(35, 35, "gold", 60, 480, "icon", "images/Treasure.png"));
+	treasure.push(new component(35, 35, "gold", 900, 200, "icon", "images/Treasure.png"));
+	treasure.push(new component(35, 35, "gold", 900, 20, "icon", "images/Treasure.png"));
 	// wall.push(new component(960, 10, "green", 100, 30, "icon", "images/Treasure.jpg"));
 
 }
@@ -338,8 +358,9 @@ function updateGameArea() {
 
             }
     }
-	darkness.x = myGamePiece.x - 990;
-	darkness.y = myGamePiece.y - 940;
+	
+	darkness.x = myGamePiece.x - 990; // Ensures that darkness follows player's x location.
+	darkness.y = myGamePiece.y - 940; // Ensures that darkness follows player's y location.
     
     questionToken[0].text = "How many leading zeros does 00001101 have? Press A for 4, B for 3, c for 2, D for 1";
     questionToken[0].correct = "A";
