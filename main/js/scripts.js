@@ -46,7 +46,7 @@
       
       //initialize modules/functions
       const auth = getAuth(app);
-      const db = getDatabase(app);      
+      //const db = getDatabase(app);      
       const fs = getFirestore(app);      
       const analytics = getAnalytics(app);
 
