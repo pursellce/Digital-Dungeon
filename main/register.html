@@ -277,17 +277,14 @@
 				}
 
 				if(isVerified){
-					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword).then((userCredential) => {
+					alert("entered isVerified if statement")
+					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword);
+					//.then((userCredential) => {
 					//signed in
 					const user = userCredential.user;
 					createTeacherInFirestore();
 					alert("Success! Account created.");
 					window.location.href= 'profile_teacher.html';
-					})
-					.catch((error) => {
-						const errorCode = error.code;
-						const errorMessage = error.message;
-					});
 				}
 			};
 		</script>
