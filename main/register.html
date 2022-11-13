@@ -221,15 +221,14 @@
 		</form>
 		<br><br>
 		<div id="NormalText"> Are you a TEACHER or STUDENT? <br><br></div>
-		<button id="teacherButton" class="ButtonPurple"> 
+		<button id="teacherButton" class="ButtonPurple" onclick = "registerTeacher()"> 
 			Teacher
 		</button>
 		<button id="studentButton" class="ButtonGreen"> 
 			Student
 		</button>
 		<script>
-			//Register Teacher
-			document.getElementById("teacherButton").addEventListener("click", function(){
+			function registerTeacher(){
 				const registerEmail = document.getElementById("registerEmailID");
 				const registerUsername = document.getElementById("registerUsernameID")
 				const registerPassword = document.getElementById("registerPasswordID");
@@ -242,26 +241,30 @@
 				regUsername = registerUsername.value;
 
 				if(regEmail == ""){
-					window.alert("Email Required");
+					alert("Email Required");
 					isVerified = false;
 				}
 				if(regUsername == ""){
-					window.alert("Username Required");
+					alert("Username Required");
 					isVerified = false;
 				}
 				if(regPassword == "" || regPasswordRepeat == ""){
-					window.alert("Password Required");
+					alert("Password Required");
+					isVerified = false;
+				}
+				if(regPassword < 8){
+					alert("Password must be at least 8 characters");
 					isVerified = false;
 				}
 				if(regPassword != regPasswordRepeat){
-					window.alert("Passwords do not match");
+					alert("Passwords do not match");
 					isVerified = false;
 				}
 
 				if(isVerified){
 					createUserWithEmailAndPassword(auth, regEmail, regPassword).then((userCredential) => {
-						//signed in
-						const user = userCredential.user;
+					//signed in
+					const user = userCredential.user;
 						createTeacherInFirestore();
 						window.alert("Success! Account created.");
 						window.location.replace("profile_teacher.html");
@@ -271,7 +274,7 @@
 						const errorMessage = error.message;
 					});
 				}
-			});
+			};
 		</script>
 		<br>
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
