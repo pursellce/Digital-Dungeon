@@ -228,6 +228,18 @@
 			Student
 		</button>
 		<script>
+			function createTeacherInFirestore(){
+        		var regEmail = registerEmail.value;
+        		var regUsername = registerUsername.value;
+        		setDoc(doc(fs, "users", userCredential.user.uid), {
+        	    AccountType: "Teacher",
+        	    Email: regEmail,
+        	    Username: regUsername,
+        	    HighScore: 0
+        	});
+      	}
+		</script>
+		<script>
 			function registerTeacher(){
 				const registerEmail = document.getElementById("registerEmailID");
 				const registerUsername = document.getElementById("registerUsernameID")
@@ -262,12 +274,12 @@
 				}
 
 				if(isVerified){
-					createUserWithEmailAndPassword(auth, regEmail, regPassword).then((userCredential) => {
+					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword).then((userCredential) => {
 					//signed in
 					const user = userCredential.user;
-						createTeacherInFirestore();
-						window.alert("Success! Account created.");
-						window.location.replace("profile_teacher.html");
+					createTeacherInFirestore();
+					alert("Success! Account created.");
+					window.location.href= 'profile_teacher.html';
 					})
 					.catch((error) => {
 						const errorCode = error.code;
