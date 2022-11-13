@@ -55,7 +55,7 @@
       const registerUsername = document.getElementById("registerUsernameID")
       const registerPassword = document.getElementById("registerPasswordID");
       const registerPasswordRepeat = document.getElementById("registerPasswordRepeatID");
-      const teacherButton = document.getElementById("teacherButton");
+      //const teacherButton = document.getElementById("teacherButton");
       const studentButton = document.getElementById("studentButton");
 
       //Vars for Login
@@ -67,7 +67,7 @@
       var regEmail, logEmail, regPassword, logPassword, regPasswordRepeat, regUsername;
 
       //Register Teacher
-      teacherButton.addEventListener("click", function(){
+      document.getElementById("teacherButton").addEventListener("click", function(){
         var isVerified = true;
         regEmail = registerEmail.value;
         regPassword = registerPassword.value;
