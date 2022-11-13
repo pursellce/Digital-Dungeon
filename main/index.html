@@ -11,6 +11,60 @@
     <script defer src="/__/firebase/9.12.1/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/9.12.1/firebase-remote-config-compat.js"></script>
     <script defer src="/__/firebase/9.12.1/firebase-performance-compat.js"></script>
+    <script>
+      //get SDKs
+      import { initializeApp } from 'firebase/app';
+      import { 
+          getAuth,
+          onAuthStateChanged,
+          createUserWithEmailAndPassword,
+          signInWithEmailAndPassword,
+          signOut
+      } from 'firebase/auth';           
+      import { 
+        getFirestore,
+        collection,
+        doc,
+        addDoc,
+        query,
+        orderBy,
+        limit,
+        onSnapshot,
+        setDoc,
+        updateDoc,
+        serverTimestamp
+      } from 'firebase/firestore';
+      import {
+        getStorage,
+        ref,
+        uploadBytesResumable,
+        getDowloadURL
+      } from 'firebase/storage';     
+      import { getAnalytics } from 'firebase/analytics';
+    //import { getDatabase } from 'firebase/database';
+
+    //Firebase configuration
+      const firebaseConfig = {      
+          apiKey: "AIzaSyCeggyHjxE11j_JdOWPokNzeyZu9KRdJII",      
+          authDomain: "digital-dungeon-7ed2d.firebaseapp.com",        
+          databaseURL: "https://digital-dungeon-7ed2d-default-rtdb.firebaseio.com",        
+          projectId: "digital-dungeon-7ed2d",        
+          storageBucket: "digital-dungeon-7ed2d.appspot.com",        
+          messagingSenderId: "131380478178",        
+          appId: "1:131380478178:web:e0d9605980bb71c5dfdebb",
+          measurementId: "G-0HRMKNQZDD"      
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      
+      //initialize modules/functions
+      const auth = getAuth(app);
+      const db = getDatabase(app);      
+      const fs = getFirestore(app);      
+      const analytics = getAnalytics(app);
+    </script>
+  </head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 

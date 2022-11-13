@@ -168,6 +168,52 @@
 					}
 				}
 			</script>
+			<script>
+				//Register Teacher
+				document.getElementById("teacherButton").addEventListener("click", function(){
+					const registerEmail = document.getElementById("registerEmailID");
+					const registerUsername = document.getElementById("registerUsernameID")
+					const registerPassword = document.getElementById("registerPasswordID");
+					const registerPasswordRepeat = document.getElementById("registerPasswordRepeatID");
+					var isVerified = true;
+					var regEmail, regPassword, regPasswordRepeat, regUsername;
+					regEmail = registerEmail.value;
+					regPassword = registerPassword.value;
+					regPasswordRepeat = registerPasswordRepeat.value;
+					regUsername = registerUsername.value;
+
+					if(regEmail == ""){
+						window.alert("Email Required");
+						isVerified = false;
+					}
+					if(regUsername == ""){
+						window.alert("Username Required");
+						isVerified = false;
+					}
+					if(regPassword == "" || regPasswordRepeat == ""){
+						window.alert("Password Required");
+						isVerified = false;
+					}
+					if(regPassword != regPasswordRepeat){
+						window.alert("Passwords do not match");
+						isVerified = false;
+					}
+
+					if(isVerified){
+						createUserWithEmailAndPassword(auth, regEmail, regPassword).then((userCredential) => {
+							//signed in
+							const user = userCredential.user;
+							createTeacherInFirestore();
+							window.alert("Success! Account created.");
+							window.location.replace("profile_teacher.html");
+						})
+						.catch((error) => {
+							const errorCode = error.code;
+							const errorMessage = error.message;
+						});
+					}
+				});
+			</script>
 		</form>
 		<br><br>
 		<div id="NormalText"> Are you a TEACHER or STUDENT? <br><br></div>
