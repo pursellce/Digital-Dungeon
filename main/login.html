@@ -2,7 +2,6 @@
 
 <html>
 	<head>
-
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 		<title>Digital Dungeon</title>
@@ -86,22 +85,6 @@
 		}
 		
 		</style>
-		<script>
-		function validateLogin(){
-			var x = document.getElementById('usernameID').value;
-			if(x == ""){
-				alert("Username required");
-				return false;
-			}
-			var y = document.getElementById('pswID').value;
-			if(y == ""){
-				alert("Password required");
-				return false;
-			}
-			return true;
-		};
-		
-		</script>
 	</head>
 	
 	<body>
@@ -110,13 +93,13 @@
 		<br><br>
 		<div id="TopText">
 		<form name="loginForm" id="NormalText" action="mainmenu.html">
-			Username <br><input type="text" name="username" id="usernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-			Password <br><input type="password" name="psw" id="pswID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
+			Username <br><input type="text" name="loginEmail" id="loginEmailID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
+			Password <br><input type="password" name="loginPassword" id="loginPasswordID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
 			<input type = "checkbox" id= "toggle" style="height:1.75vw; width:1.75vw"/>Show Password
 			<script>
 				document.querySelector('#toggle').addEventListener("click", togglePass);
 				function togglePass(){
-					var pswEle = document.getElementById("pswID");
+					var pswEle = document.getElementById("loginPasswordID");
 					if(pswEle.type === "password"){
 						pswEle.type = "text";
 					}
@@ -127,15 +110,15 @@
 			</script>
 			<br>
 			<br><br>
-			<button class="ButtonBlue" onclick="return validateLogin();"> 
-				Submit
-			</button>
 		</form>
-		<br>
-		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
+		<button id="loginSubmitButton" class="ButtonBlue"> 
+			Submit
+		</button>
+		<button id=loginCancelButton class="ButtonRed" onclick="window.location.href='index.html';"> 
 			Cancel
 		</button>
 		<br><br>
 		</div>
+		<script type = "module" src="scripts.js"></script>
 	</body>
 </html>
