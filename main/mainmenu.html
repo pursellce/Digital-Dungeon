@@ -216,12 +216,12 @@
 	</div>
 	<script>
 		function logoutUser(){
-			firebase.auth().signOut(auth)
-				.then(()=>{
+			firebase.auth().signOut()
+				.then(function(){
 					alert("Logout successful!");
 					window.location.href='index.html';
 				})
-				.catch((error)=>{
+				.catch(function(error){
 					var errorCode = error.code;
 					var errorMessage = error.message;
 					alert(errorMessage);
