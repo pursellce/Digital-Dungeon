@@ -216,21 +216,23 @@
 	</div>
 	<script>
 		function logoutUser(){
-			firebase.auth().onAuthStateChanged(function(user){
+			firebase.auth().signOut();
+			firebase.auth().onAuthStateChanged(auth, (user) => {
 				if(user){
-					firebase.auth().signOut()
-					.then(function(){
-						alert("Logout successful!");
+					alert("Logout unsucessful");
+					consol.log("logout unsuccessful");
+					}
+					else{
+						alert("Logout successful");
 						window.location.href='index.html';
-					})
-					.catch(function(error){
-						var errorCode = error.code;
-						var errorMessage = error.message;
-						alert(errorMessage);
-					})
-				}
-			})
-		}
+					}
+				})
+				.catch(function(error){
+					var errorCode = error.code;
+					var errorMessage = error.message;
+					alert(errorMessage);
+				})
+			}
 	</script>
 
     <div id="NormalText"> <br> </div>
