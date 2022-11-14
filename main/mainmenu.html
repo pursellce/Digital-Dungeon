@@ -2,6 +2,50 @@
 
 <html>
 	<head>
+		<script>
+			//get SDKs
+			import { initializeApp } from 'firebase/app';
+			import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';           
+			import { getAnalytics } from 'firebase/analytics';
+			/* Currently not in use. 
+			import { 
+				getFirestore,
+				collection,
+				doc,
+				addDoc,
+				query,
+				orderBy,
+				limit,
+				onSnapshot,
+				setDoc,
+				updateDoc,
+				serverTimestamp
+			} from 'firebase/firestore';  
+			*/   
+
+			//Firebase configuration
+			const firebaseConfig = {      
+				apiKey: "AIzaSyCeggyHjxE11j_JdOWPokNzeyZu9KRdJII",      
+				authDomain: "digital-dungeon-7ed2d.firebaseapp.com",        
+				databaseURL: "https://digital-dungeon-7ed2d-default-rtdb.firebaseio.com",        
+				projectId: "digital-dungeon-7ed2d",        
+				storageBucket: "digital-dungeon-7ed2d.appspot.com",        
+				messagingSenderId: "131380478178",        
+				appId: "1:131380478178:web:e0d9605980bb71c5dfdebb",
+				measurementId: "G-0HRMKNQZDD"      
+			};
+
+			// Initialize Firebase
+			const app = initializeApp(firebaseConfig);
+			
+			//initialize modules/functions
+			const auth = getAuth(app);     
+			const fs = getFirestore(app);
+			const fsRef = collection(fs, "users");
+		</script>	
+		<script src="/__/firebase/9.13.0/firebase-app-compat.js"></script>
+		<script src="/__/firebase/9.13.0/firebase-auth-compat.js"></script>
+		<script src="/__/firebase/init.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Digital Dungeon</title>
@@ -168,8 +212,22 @@
     <div id="NormalText"> <br> </div>
 	
 	<div style="position: absolute; left: 40%; top: 76%;">
-	<button id="logoutButton" class="ButtonRed"> Logout </button> <br>
+	<button id="logoutButton" class="ButtonRed" onclick="logoutUser()"> Logout </button> <br>
 	</div>
+	<script>
+		function logoutUser(){
+			firebase.auth().signOut(auth)
+				.then(()=>{
+					alert("Logout successful!");
+					window.location.href='index.html';
+				})
+				.catch((error)=>{
+					var errorCode = error.code;
+					var errorMessage = error.message;
+					alert(errorMessage);
+				})
+			}
+	</script>
 
     <div id="NormalText"> <br> </div>
 	

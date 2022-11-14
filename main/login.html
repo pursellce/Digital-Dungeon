@@ -5,12 +5,8 @@
 		<script>
 			//get SDKs
 			import { initializeApp } from 'firebase/app';
-			import { 
-				getAuth,
-				onAuthStateChanged,
-				signInWithEmailAndPassword,
-				signOut
-			} from 'firebase/auth';           
+			import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';           
+			import { getAnalytics } from 'firebase/analytics';
 			/* Currently not in use. 
 			import { 
 				getFirestore,
@@ -26,7 +22,7 @@
 				serverTimestamp
 			} from 'firebase/firestore';  
 			*/   
-			import { getAnalytics } from 'firebase/analytics';
+			
 
 			//Firebase configuration
 			const firebaseConfig = {      
