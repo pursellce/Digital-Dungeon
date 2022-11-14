@@ -194,10 +194,10 @@
       
       function authStateObserver(user) {
         if(user){//User is signed in
-            var userName = getUsername();
-            var highScore = getHighScore();
-            //add variables for report elements
-        
+            alert("User is signed in");
+        }
+        else{
+            alert("User is not signed in");
         }
       }
     //WIP Functions 
