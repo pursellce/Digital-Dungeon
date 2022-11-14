@@ -227,16 +227,15 @@
 			Student
 		</button>
 		<script>
-			/* WIP
 			function createTeacherInFirestore(userCredential, regEmail, regUsername){
-				const docRef = firebase.firestore().doc(fs, "users", userCredential.user.uid);
+				const newTeacherRef = doc(collection(fs, "users"));
 				const data ={
 					AccountType: "Teacher",
 					Email: regEmail,
 					Username: regUsername,
 					HighScore: 0
 				}
-        		firebase.firestore().setDoc(docRef, data)
+        		setDoc(newTeacherRef, data)
 				.then(() => {
     				console.log("Document has been added successfully");
 					})
@@ -244,7 +243,6 @@
 					console.log(error);
 				})
         	};
-			*/
 		</script>
 		<script>
 			function registerTeacher(){
@@ -282,7 +280,7 @@
 
 				if(isVerified){
 					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword).then((userCredential) => {
-					//createTeacherInFirestore(userCredential, regEmail, regUsername);
+					createTeacherInFirestore(userCredential, regEmail, regUsername);
 					//check if user is signed in:
 					var user = firebase.auth().currentUser;
 					firebase.auth().onAuthStateChanged(function(user){
