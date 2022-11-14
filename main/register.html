@@ -232,7 +232,7 @@
 		</button>
 		<script>
 			function createTeacherInFirestore(userCredential, regEmail, regUsername){
-				const docRef = doc(fs, "users", userCredential.user.uid);
+				const docRef = firebase.firestore().doc(fs, "users", userCredential.user.uid);
 				const data ={
 					AccountType: "Teacher",
 					Email: regEmail,
