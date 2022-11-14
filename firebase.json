@@ -19,8 +19,8 @@
       ]
     },
     {
-      "source": "test",
-      "codebase": "test",
+      "source": "main",
+      "codebase": "main",
       "ignore": [
         "node_modules",
         ".git",
