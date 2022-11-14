@@ -50,7 +50,8 @@
 			
 			//initialize modules/functions
 			const auth = getAuth(app);     
-			const fs = getFirestore(app);    
+			const fs = getFirestore(app);
+			const fsRef = collection(fs, "users");
 		</script>
 		<script src="/__/firebase/9.13.0/firebase-app-compat.js"></script>
 		<script src="/__/firebase/9.13.0/firebase-auth-compat.js"></script>
@@ -231,13 +232,21 @@
 		</button>
 		<script>
 			function createTeacherInFirestore(userCredential, regEmail, regUsername){
-        		fs.setDoc(doc(fs, "users", userCredential.user.uid), {
-        	    AccountType: "Teacher",
-        	    Email: regEmail,
-        	    Username: regUsername,
-        	    HighScore: 0
-        	});
-      	}
+				const docRef = doc(fs, "users", userCredential.user.uid);
+				const data ={
+					AccountType: "Teacher",
+					Email: regEmail,
+					Username: regUsername,
+					HighScore: 0
+				}
+        		setDoc(docRef, data)
+				.then(() => {
+    				console.log("Document has been added successfully");
+					})
+				.catch(error => {
+					console.log(error);
+				})
+        	};
 		</script>
 		<script>
 			function registerTeacher(){
@@ -280,8 +289,11 @@
 					alert("Success! Account created.");
 					window.location.href= 'profile_teacher.html';
 					})
+					.catch(error=>{
+						console.log(error);
+					})
 				}
-			};
+			}
 		</script>
 		<br>
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
