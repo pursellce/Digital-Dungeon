@@ -176,7 +176,7 @@
       function createTeacherInFirestore(){
         regEmail = registerEmail.value;
         regUsername = registerUsername.value;
-        fs.setDoc(doc(fs, "users", userCredential.user.uid), {
+        setDoc(doc(fs, "users", userCredential.user.uid), {
             AccountType: "Teacher",
             Email: regEmail,
             Username: regUsername,
