@@ -231,9 +231,7 @@
 			Student
 		</button>
 		<script>
-			function createTeacherInFirestore(){
-        		var regEmail = registerEmail.value;
-        		var regUsername = registerUsername.value;
+			function createTeacherInFirestore(userCredential, regEmail, regUsername){
         		setDoc(doc(fs, "users", userCredential.user.uid), {
         	    AccountType: "Teacher",
         	    Email: regEmail,
@@ -277,11 +275,9 @@
 				}
 
 				if(isVerified){
-					alert("entered isVerified if statement")
 					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword).then((userCredential) => {
 					//signed in
-					const user = userCredential.user;
-					createTeacherInFirestore();
+					createTeacherInFirestore(userCredential, regEmail, regUsername);
 					alert("Success! Account created.");
 					window.location.href= 'profile_teacher.html';
 					})
