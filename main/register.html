@@ -239,7 +239,7 @@
 					Username: regUsername,
 					HighScore: 0
 				}
-        		setDoc(docRef, data)
+        		firebase.firestore().setDoc(docRef, data)
 				.then(() => {
     				console.log("Document has been added successfully");
 					})
