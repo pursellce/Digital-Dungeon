@@ -290,9 +290,11 @@
 							user.updateProfile({
 								displayName: regUsername
 							})
+							console.log('username saved');
 						}
 						else{
 							alert("User is not signed in");
+							console.log('login failed');
 						}
 					})
 					alert("Success! Account created.");

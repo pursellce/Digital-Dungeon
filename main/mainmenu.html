@@ -216,7 +216,19 @@
 	</div>
 	<script>
 		function logoutUser(){
-			firebase.auth().signOut();
+			firebase.auth().signOut()
+			.then(function(){
+				alert("Logout Successful");
+				window.location.href='index.html';
+
+			})
+			.catch(function(error){
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				alert(errorMessage);
+			})
+
+			/*Not current working
 			firebase.auth().onAuthStateChanged(auth, (user) => {
 				if(user){
 					alert("Logout unsucessful");
@@ -232,7 +244,9 @@
 					var errorMessage = error.message;
 					alert(errorMessage);
 				})
+			*/
 			}
+			
 	</script>
 
     <div id="NormalText"> <br> </div>
