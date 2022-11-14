@@ -228,14 +228,17 @@
 		</button>
 		<script>
 			function createTeacherInFirestore(userCredential, regEmail, regUsername){
-				const newTeacherRef = doc(collection(fs, "users"));
 				const data ={
 					AccountType: "Teacher",
 					Email: regEmail,
 					Username: regUsername,
 					HighScore: 0
 				}
-        		setDoc(newTeacherRef, data)
+        		setDoc(doc(fs, "users", userCredential.user.uid), {
+					AccountType: "Teacher",
+					Username: regUsername,
+					HighScore: 0
+				})
 				.then(() => {
     				console.log("Document has been added successfully");
 					})
