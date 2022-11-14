@@ -14,34 +14,8 @@
     <script>
       //get SDKs
       import { initializeApp } from 'firebase/app';
-      import { 
-          getAuth,
-          onAuthStateChanged,
-          createUserWithEmailAndPassword,
-          signInWithEmailAndPassword,
-          signOut
-      } from 'firebase/auth';           
-      import { 
-        getFirestore,
-        collection,
-        doc,
-        addDoc,
-        query,
-        orderBy,
-        limit,
-        onSnapshot,
-        setDoc,
-        updateDoc,
-        serverTimestamp
-      } from 'firebase/firestore';
-      import {
-        getStorage,
-        ref,
-        uploadBytesResumable,
-        getDowloadURL
-      } from 'firebase/storage';     
+      import { getAuth, onAuthStateChanged } from 'firebase/auth';   
       import { getAnalytics } from 'firebase/analytics';
-    //import { getDatabase } from 'firebase/database';
 
     //Firebase configuration
       const firebaseConfig = {      
@@ -60,8 +34,8 @@
       
       //initialize modules/functions
       const auth = getAuth(app);
-      const db = getDatabase(app);      
-      const fs = getFirestore(app);      
+      //const db = getDatabase(app);      
+     // const fs = getFirestore(app);      
       const analytics = getAnalytics(app);
     </script>
   </head>
@@ -218,7 +192,7 @@
   <body>
     <p style="font-size:1.7vw"><br></p> <!-- This line adds spaces at the top of the page -->
 	
-    <!--<div id="TopText">DIGITAL_DUNGEON<!-- This line centers the title but also just happens to center all of the buttons which is why it doesn't close until way later down. -->
+    <!--<div id="TopText">DIGITAL_DUNGEON<-- This line centers the title but also just happens to center all of the buttons which is why it doesn't close until way later down. -->
     
     <br><br>
     <div style="position: absolute; left: 40%; top: 26%;">
@@ -235,32 +209,5 @@
 	<div style="position: absolute; left: 40%; top: 72%;">
     <button class="ButtonRed" onclick="window.location.href='game.html';">Guest </button> <br><br>
     </div> <!-- This is where the part that centers DIGITAL_DUNGEON and everything else on the page is closed. -->
-
-    <script>
-      /*Possibly unnessecary code
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-      */
-    </script>
   </body>
 </html>
