@@ -397,31 +397,15 @@ function updateGameArea() {
 		{
 			CurrentLevel += 1;
 			ClearLevel();
-            endgame_update();
+
 			if (CurrentLevel == 2)
 			{
 				GenerateLevel2();
 			}
+            endgame_update();
 		}
 	}
-    //CONNOR ****************************************** CONNOR//
-    //CONNOR ****************************************** CONNOR//
-	//CONNOR ****************************************** CONNOR//
-    function endgame_update(){
-        var final_score = score;
-        var qA_time = questionToken[0].question_time;
-        var qA_count= queastionToken[0].ans_count;
-        var qB_time = questionToken[1].question_time;
-        var qB_count= queastionToken[1].ans_count;
-        var qC_time = questionToken[2].question_time;
-        var qC_count= queastionToken[2].ans_count;
-        var qD_time = questionToken[3].question_time;
-        var qD_count= queastionToken[3].ans_count;
-        var total_time = myGameArea.frameNo;
-    }
-	//CONNOR ****************************************** CONNOR//
-    //CONNOR ****************************************** CONNOR//
-	//CONNOR ****************************************** CONNOR//
+
 
 	// These two variables are for helping handle collision. They are used to set the player back to their previous position if a collision occures.
 	LastFrameXLocation = myGamePiece.x;
@@ -453,6 +437,24 @@ function updateGameArea() {
 	updateAllElements();//calls all of the updates
 
 }
+    //CONNOR ****************************************** CONNOR//
+    //CONNOR ****************************************** CONNOR//
+	//CONNOR ****************************************** CONNOR//
+    function endgame_update(){
+        var final_score = score;
+        var qA_time = questionToken[0].question_time;
+        var qA_count= queastionToken[0].ans_count;
+        var qB_time = questionToken[1].question_time;
+        var qB_count= queastionToken[1].ans_count;
+        var qC_time = questionToken[2].question_time;
+        var qC_count= queastionToken[2].ans_count;
+        var qD_time = questionToken[3].question_time;
+        var qD_count= queastionToken[3].ans_count;
+        var total_time = myGameArea.frameNo;
+    }
+	//CONNOR ****************************************** CONNOR//
+    //CONNOR ****************************************** CONNOR//
+	//CONNOR ****************************************** CONNOR//
 
 // Function for when the player clicks the A button on screen.
 function AnswerA(){
