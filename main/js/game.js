@@ -202,9 +202,9 @@ function component(width, height, color, x, y, type, imag) {
             img.src = this.imag;//to load in image 
             ctx.drawImage(img, this.x, this.y, this.width, this.height);//drawing image
         } else if(this.type == "token") {//need a way to stop movement so multiple questions arent displayed
-            if(display_question == this.count && this.crashWith(myGamePiece))
+            if(this.crashWith(myGamePiece)) //&& display_question == this.count
                {this.crashed = true; }
-            if(!(this.crashed) && display_question == this.count){//if not crashed, and question is ready to be answered, display token
+            if(!(this.crashed)){ // && display_question == this.count){//if not crashed, and question is ready to be answered, display token
                // ctx.fillStyle = color;
                this.start_time = myGameArea.frameNo;
                 const img = new Image();//creating image
@@ -397,15 +397,32 @@ function updateGameArea() {
 		{
 			CurrentLevel += 1;
 			ClearLevel();
+            endgame_update();
 			if (CurrentLevel == 2)
 			{
 				GenerateLevel2();
 			}
 		}
 	}
-	
+    //CONNOR ****************************************** CONNOR//
+    //CONNOR ****************************************** CONNOR//
+	//CONNOR ****************************************** CONNOR//
+    function endgame_update(){
+        var final_score = score;
+        var qA_time = questionToken[0].question_time;
+        var qA_count= queastionToken[0].ans_count;
+        var qB_time = questionToken[1].question_time;
+        var qB_count= queastionToken[1].ans_count;
+        var qC_time = questionToken[2].question_time;
+        var qC_count= queastionToken[2].ans_count;
+        var qD_time = questionToken[3].question_time;
+        var qD_count= queastionToken[3].ans_count;
+        var total_time = myGameArea.frameNo;
+    }
+	//CONNOR ****************************************** CONNOR//
+    //CONNOR ****************************************** CONNOR//
+	//CONNOR ****************************************** CONNOR//
 
-	
 	// These two variables are for helping handle collision. They are used to set the player back to their previous position if a collision occures.
 	LastFrameXLocation = myGamePiece.x;
 	LastY = myGamePiece.y;
@@ -491,8 +508,10 @@ function updateAllElements(){
         if(!questionToken[i].crashed)
             {questionToken[i].update();}
     }
-    
+    ladder.update();
     darkness.update();
+    myGamePiece.newPos();
+    myGamePiece.update();
     for(i = 0; i < question_count;i++)//if you have crashed you want the text box to display over darkness
     {
         //q[i].update();
@@ -500,9 +519,8 @@ function updateAllElements(){
             {questionToken[i].update();}
     }
     
-    myGamePiece.newPos();
-    myGamePiece.update();
-	ladder.update();
+  
+
 
 
 	Frame.text="FRAME: " + myGameArea.frameNo;
