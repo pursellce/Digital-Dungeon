@@ -18,11 +18,12 @@ var screenButton = 0;
 var darkness;
 var TotalLevels = 2;
 var CurrentLevel = 1;
+var display_question = 0;
 
 
 function startGame() {
     myGamePiece = new component(30,30,"red",450,400,"icon", "images/player.png");//30, 30, "red", 10, 120);
-	darkness = new component(2000,2000,"red",-500,-500,"icon", "images/"); // Darkness.png  	RE-ADD THIS TO RE-ADD DARKNESS!!!!!!!!!!!!!!!!!!
+	darkness = new component(2000,2000,"red",-500,-500,"icon", "images/Darkness.png"); // Darkness.png  	RE-ADD THIS TO RE-ADD DARKNESS!!!!!!!!!!!!!!!!!!
     //myGamePiece.gravity = 0.05;  // Commenting this out disables gravity. Will probably fully remove gravity later.
     myScore = new component("30px", "Consolas", "white", 280, 40, "text","");
 
@@ -72,20 +73,30 @@ function GenerateLevel1() {
 	
     for(i = 0; i < question_count; i++)//making all question tokens
     {
-	    questionToken.push(new component(15,15,"gold", 400+i*40, 400-i*18,"token"));
+	    ;//questionToken.push(new component(30,30,"gold", Math.floor(Math.random() * 900), Math.floor(Math.random() * 900),"token"));
     }
+
+    questionToken.push(new component(35, 35, "gold", 555, 280, "token")); 
+	questionToken.push(new component(35, 35, "gold", 60, 100, "token")); 
+	questionToken.push(new component(35, 35, "gold", 60, 280, "token")); 
+	questionToken.push(new component(35, 35, "gold", 60, 480, "token")); 
+	//treasure.push(new component(35, 35, "gold", 900, 200, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 900, 20, "icon", "images/Treasure.png"));
     for(i = 0; i < question_count;i++)//marks all crashes for tokens as false initially
     {
         questionToken[i].crashed = false;
+        questionToken[i].inc = true;
+        questionToken[i].count = i;
+        questionToken[i].ans_count = 0;
     }
 	// Objects that the level has.
 	ladder = new component(30, 30, "red", 900, 400, "icon", "images/Ladder.png");
-	treasure.push(new component(35, 35, "gold", 555, 280, "icon", "images/Treasure.png"));
-	treasure.push(new component(35, 35, "gold", 60, 100, "icon", "images/Treasure.png"));
-	treasure.push(new component(35, 35, "gold", 60, 280, "icon", "images/Treasure.png"));
-	treasure.push(new component(35, 35, "gold", 60, 480, "icon", "images/Treasure.png"));
-	treasure.push(new component(35, 35, "gold", 900, 200, "icon", "images/Treasure.png"));
-	treasure.push(new component(35, 35, "gold", 900, 20, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 555, 280, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 60, 100, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 60, 280, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 60, 480, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 900, 200, "icon", "images/Treasure.png"));
+	//treasure.push(new component(35, 35, "gold", 900, 20, "icon", "images/Treasure.png"));
 	// wall.push(new component(960, 10, "green", 100, 30, "icon", "images/Treasure.jpg"));
 
 }
@@ -191,13 +202,17 @@ function component(width, height, color, x, y, type, imag) {
             img.src = this.imag;//to load in image 
             ctx.drawImage(img, this.x, this.y, this.width, this.height);//drawing image
         } else if(this.type == "token") {//need a way to stop movement so multiple questions arent displayed
-            if(this.crashWith(myGamePiece))
-               {this.crashed = true;}
-            if(!(this.crashed)){//if not crashed display token
-                ctx.fillStyle = color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
+            if(display_question == this.count && this.crashWith(myGamePiece))
+               {this.crashed = true; }
+            if(!(this.crashed) && display_question == this.count){//if not crashed, and question is ready to be answered, display token
+               // ctx.fillStyle = color;
+               this.start_time = myGameArea.frameNo;
+                const img = new Image();//creating image
+                img.src = "images/Treasure.png";
+                ctx.drawImage(img, this.x, this.y, this.width, this.height);
+                //ctx.fillRect(this.x, this.y, this.width, this.height);
             }
-            else{ 
+            else if (this.crashed){ 
             if((this.ans != this.correct) && !this.done)//display question as long as wrong answer
                 {   
                     ctx.fillStyle = 'rgb(151, 100, 90)';//text box values
@@ -222,12 +237,20 @@ function component(width, height, color, x, y, type, imag) {
                         {
                             ctx.fillText(this.text.substring(0,this.text_spot), 70,linestart );//this.x, this.y);
                         } */
-
                     ctx.fillText(this.text.substring(0,60), 70,linestart );//line 1
-                    ctx.fillText(this.text.substring(61,121), 70,linestart+30);//line 2
-                    ctx.fillText(this.text.substring(122,183), 70,linestart+60);//line 3
+                    ctx.fillText(this.text.substring(60,120), 70,linestart+30);//line 2
+                    ctx.fillText(this.text.substring(120,180), 70,linestart+60);//line 3
                 }
-                if(this.ans == this.correct){this.done = true;}
+                if(this.ans == this.correct && this.inc){//only runs once calculates score
+                    this.end_time = myGameArea.frameNo; 
+                    this.question_time = this.end_time-this.start_time;
+                    this.done = true;
+                    display_question++;
+                    if(this.question_time < 2000)
+                        this.time_bonus = Math.round((2000 - this.question_time) / 10 );
+                    else{this.time_bonus = 0;}
+                    score += (5 - this.ans_count)*25 + this.time_bonus;
+                    this.inc = false;}
 
             }
         }else {
@@ -314,10 +337,10 @@ function updateGameArea() {
     for(i = 0; i < question_count; i++)//needs work
     {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
         if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
-            if (myGameArea.keys && myGameArea.keys[65]) { questionToken[i].ans = "A"; }//
-            else if (myGameArea.keys && myGameArea.keys[66]) { questionToken[i].ans = "B"; }//b
-            else if (myGameArea.keys && myGameArea.keys[67]) { questionToken[i].ans = "C"; }//
-            else if (myGameArea.keys && myGameArea.keys[68]) { questionToken[i].ans = "D"; }
+            if (myGameArea.keys && myGameArea.keys[65] && questionToken[i].ans != "A") { questionToken[i].ans = "A"; questionToken[i].ans_count++;}//
+            else if (myGameArea.keys && myGameArea.keys[66] && questionToken[i].ans != "B") { questionToken[i].ans = "B"; questionToken[i].ans_count++;}//b
+            else if (myGameArea.keys && myGameArea.keys[67] && questionToken[i].ans != "C") { questionToken[i].ans = "C";questionToken[i].ans_count++; }//
+            else if (myGameArea.keys && myGameArea.keys[68] && questionToken[i].ans != "D") { questionToken[i].ans = "D"; questionToken[i].ans_count++;}
         }
     }
 	// Next group of if statements are for the OLD on screen controls.
@@ -419,7 +442,7 @@ function AnswerA(){
 	for(i = 0; i < question_count; i++)//needs work
     {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
         if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
-            questionToken[i].ans = "A";//   
+            questionToken[i].ans = "A"; questionToken[i].ans_count++;//   
         }
     }
 }
@@ -429,7 +452,7 @@ function AnswerB(){
 	for(i = 0; i < question_count; i++)//needs work
     {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
         if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
-            questionToken[i].ans = "B";//   
+            questionToken[i].ans = "B";questionToken[i].ans_count++;//   
         }
     }
 }
@@ -439,7 +462,7 @@ function AnswerC(){
 	for(i = 0; i < question_count; i++)//needs work
     {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
         if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
-            questionToken[i].ans = "C";//   
+            questionToken[i].ans = "C";questionToken[i].ans_count++;//   
         }
     }
 }
@@ -449,31 +472,39 @@ function AnswerD(){
 	for(i = 0; i < question_count; i++)//needs work
     {//when the jgame peice crahses with the token it registers input, need a way to make different answers and maybe track responses
         if(myGamePiece.crashWith( questionToken[i]) && !questionToken[i].done){//doesnt run if already answered
-            questionToken[i].ans = "D";//   
+            questionToken[i].ans = "D";questionToken[i].ans_count++; 
         }
     }
 }
 
 
 function updateAllElements(){
-    for(i = 0; i < question_count;i++)//update all questions
-    {
-        //q[i].update();
-        questionToken[i].update();
-    }
+
     for (i = 0; i < wall.length; i += 1) {
 		wall[i].update();
 	}
-	
+    UpdateAndCheckTreasure();
+
+    for(i = 0; i < question_count;i++)//if you havent crashed you want the treasure chests below the darkness
+    {
+        //q[i].update();
+        if(!questionToken[i].crashed)
+            {questionToken[i].update();}
+    }
     
-
-
+    darkness.update();
+    for(i = 0; i < question_count;i++)//if you have crashed you want the text box to display over darkness
+    {
+        //q[i].update();
+        if(questionToken[i].crashed)
+            {questionToken[i].update();}
+    }
     
     myGamePiece.newPos();
     myGamePiece.update();
 	ladder.update();
-    UpdateAndCheckTreasure();
-	darkness.update();
+
+
 	Frame.text="FRAME: " + myGameArea.frameNo;
     Frame.update();
 	myScore.text="SCORE: " + score;
@@ -482,6 +513,7 @@ function updateAllElements(){
 	myDownBtn.update();
 	myLeftBtn.update();
 	myRightBtn.update();
+
 }
 
 function UpdateAndCheckTreasure(){
