@@ -5,7 +5,7 @@
 		<script>
 			//get SDKs
 			import { initializeApp } from 'firebase/app';
-			import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';           
+			import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';           
 			import { 
 				getFirestore,
 				collection,
@@ -227,7 +227,7 @@
 			Student
 		</button>
 		<script>
-			function createTeacherInFirestore(userCredential, regEmail, regUsername){
+			function createTeacherInFirestore(userCredential, regEmail, regUsername){				
 				const data ={
 					AccountType: "Teacher",
 					Email: regEmail,
@@ -280,7 +280,20 @@
 					alert("Passwords do not match");
 					isVerified = false;
 				}
+////NEW CODE
+				if(isVerified){
+					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
+					.then(function(result){
+						return result.user.updateProfile({
+							displayName: regUsername
+						})
+					}).catch(function(error){
+						console.log(error);
+					});
+				}
+			}
 
+/*OLD WORKING CODE (for creating user at least)
 				if(isVerified){
 					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword).then((userCredential) => {
 					createTeacherInFirestore(userCredential, regEmail, regUsername);
@@ -309,6 +322,7 @@
 					})
 				}
 			}
+*/			
 		</script>
 		<br>
 		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
