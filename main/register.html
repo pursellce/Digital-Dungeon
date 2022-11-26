@@ -4,8 +4,8 @@
 	<head>
 		<script type="module">
 			//get SDKs
-			import { initializeApp } from 'firebase/app';
-			import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';           
+			import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js';
+			import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js';           
 			import { 
 				getFirestore,
 				collection,
@@ -18,7 +18,7 @@
 				setDoc,
 				updateDoc,
 				serverTimestamp
-			} from 'firebase/firestore';
+			} from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js';
 			/*Might not be needed on this page. Still testing
 			import {
 				getStorage,
