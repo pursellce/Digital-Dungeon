@@ -227,6 +227,7 @@
 			Student
 		</button>
 		<script>
+			/*OLD CODE - MAYBE DELETE
 			function createTeacherInFirestore(userCredential, regEmail, regUsername){				
 				const data ={
 					AccountType: "Teacher",
@@ -246,6 +247,7 @@
 					console.log(error);
 				})
         	};
+			*/
 		</script>
 		<script>
 			function registerTeacher(){
@@ -283,11 +285,26 @@
 ////NEW CODE
 				if(isVerified){
 					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
-					.then(function(result){
+					.then(async function(result){
+						var newUID = result.user.uid;
+						try {
+							const docRef = await addDoc(collection(fs, "users", newUID), {
+								AccountType: "Teacher",
+								Username: regUsername,
+								HighScore: 0
+							});
+							console.log("Success! Account created.");
+							console.log("Document written with ID: ", docRef.id);
+							window.location.href= 'profile_teacher.html';
+						}
+						catch(err){
+							console.error("Error adding document: ", err);
+						}
 						return result.user.updateProfile({
 							displayName: regUsername
 						})
-					}).catch(function(error){
+					})
+					.catch(function(error){
 						console.log(error);
 					});
 				}
