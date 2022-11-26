@@ -251,6 +251,7 @@
 		</script>
 		<script>
 			function registerTeacher(){
+				//Get all user input and store in variables
 				const registerEmail = document.getElementById("registerEmailID");
 				const registerUsername = document.getElementById("registerUsernameID")
 				const registerPassword = document.getElementById("registerPasswordID");
@@ -261,7 +262,7 @@
 				regPassword = registerPassword.value;
 				regPasswordRepeat = registerPasswordRepeat.value;
 				regUsername = registerUsername.value;
-
+				//Client-side mediation of user input and alert errors
 				if(regEmail == ""){
 					alert("Email Required");
 					isVerified = false;
@@ -283,16 +284,18 @@
 					isVerified = false;
 				}
 ////NEW CODE
+				//If user input is correct, create new account and database entry for user
 				if(isVerified){
+					const userData ={
+						AccountType: "Teacher",
+						Email: regEmail,
+						Username: regUsername,
+						HighScore: 0
+					}
 					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
 					.then(async function(result){
-						var newUID = result.user.uid;
 						try {
-							const docRef = await addDoc(collection(fs, "users", newUID), {
-								AccountType: "Teacher",
-								Username: regUsername,
-								HighScore: 0
-							});
+							const docRef = await addDoc(collection(fs, "users", result.user.uid), userData);
 							console.log("Success! Account created.");
 							console.log("Document written with ID: ", docRef.id);
 							window.location.href= 'profile_teacher.html';
