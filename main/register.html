@@ -295,7 +295,7 @@
 					firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
 					.then(async function(result){
 						try {
-							const docRef = await addDoc(collection(fs, "users", result.user.uid), userData);
+							const docRef = await setDoc(collection(fs, "users", result.user.uid), userData);
 							console.log("Success! Account created.");
 							console.log("Document written with ID: ", docRef.id);
 							window.location.href= 'profile_teacher.html';
