@@ -184,11 +184,11 @@
 
 		<div id="CenterText">
 		<form name="registerForm" id="NormalText" action="mainmenu.html" onsubmit="return verifyForm()">
-			Email <br><input label="Email" type="text" name="registerEmail" id= "registerEmailID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ><br><br>
-			Username <br><input label="Username" type="text" name="registerUsername" id= "registerUsernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ><br><br>
-			Password <br><input label="Password" type="password" name="registerPassword" id="registerPasswordID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br><br>
-			Confirm Password <br><input label ="Confirm Password" type="password" name="registerPasswordRepeat" id="registerPasswordRepeatID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"><br>
-			<input label="TogglePasswordVisibility" type = "checkbox" id= "toggle" style="height:1.75vw; width:1.75vw"/>Show Passwords
+			<label>Email <br><input label="Email" type="text" name="registerEmail" id= "registerEmailID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ></label><br><br>
+			<label>Username <br><input label="Username" type="text" name="registerUsername" id= "registerUsernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ></label><br><br>
+			<label>Password <br><input label="Password" type="password" name="registerPassword" id="registerPasswordID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"></label><br><br>
+			<label>Confirm Password <br><input label ="Confirm Password" type="password" name="registerPasswordRepeat" id="registerPasswordRepeatID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"></label><br>
+			<label><input label="TogglePasswordVisibility" type = "checkbox" id= "toggle" style="height:1.75vw; width:1.75vw"/>Show Passwords</label>
 			<script>
 				document.querySelector('#toggle').addEventListener("click", togglePass);
 				function togglePass(){
@@ -207,12 +207,16 @@
 		</form>
 		<br><br>
 		<div id="NormalText"> Are you a TEACHER or STUDENT? <br><br></div>
-		<button id="teacherButton" class="ButtonPurple" onclick = "registerTeacher()"> 
-			Teacher
-		</button>
-		<button id="studentButton" class="ButtonGreen"> 
-			Student
-		</button>
+		<label>
+			<button id="teacherButton" class="ButtonPurple" onclick = "registerTeacher()"> 
+				Teacher
+			</button>
+		</label>
+		<label>
+			<button id="studentButton" class="ButtonGreen"> 
+				Student
+			</button>
+		</label>
 		<script>
 			/*OLD CODE - MAYBE DELETE
 			function createTeacherInFirestore(userCredential, regEmail, regUsername){				
@@ -332,12 +336,16 @@
 */			
 		</script>
 		<br>
-		<button class="ButtonRed" onclick="window.location.href='index.html';"> 
-			Cancel
-		</button>
-		<button class="ButtonBlue" onclick="window.location.href='login.html';"> 
-			Login
-		</button>
+		<label>
+			<button class="ButtonRed" onclick="window.location.href='index.html';"> 
+				Cancel
+			</button>
+		</label>
+		<label>
+			<button class="ButtonBlue" onclick="window.location.href='login.html';"> 
+				Login
+			</button>
+		</label>
 		<br><br>
 		</div>
 	</body>
