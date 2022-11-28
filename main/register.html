@@ -188,7 +188,7 @@
 			<label>Username <br><input label="Username" type="text" name="registerUsername" id= "registerUsernameID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray" ></label><br><br>
 			<label>Password <br><input label="Password" type="password" name="registerPassword" id="registerPasswordID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"></label><br><br>
 			<label>Confirm Password <br><input label ="Confirm Password" type="password" name="registerPasswordRepeat" id="registerPasswordRepeatID" style="height:2.0vw; width:25vw; font-family:Consolas; font-size: 1.5vw; color:dimgray"></label><br>
-			<label><input label="TogglePasswordVisibility" type = "checkbox" id= "toggle" style="height:1.75vw; width:1.75vw"/>Show Passwords</label>
+			<label for="toggle"><input label="TogglePasswordVisibility" type = "checkbox" id= "toggle" style="height:1.75vw; width:1.75vw"/>Show Passwords</label>
 			<script>
 				document.querySelector('#toggle').addEventListener("click", togglePass);
 				function togglePass(){
